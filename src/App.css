@@ -1,10 +1,100 @@
 .App {
-  text-align: center;
+  text-align: left;
 }
 
 .App-logo {
-  height: 40vmin;
+  max-width: 100px;
   pointer-events: none;
+}
+
+.container{
+  max-width: 1280px;
+}
+
+.slide-home{
+  display: flex;
+  min-height: 400px;
+  justify-content: center;
+  align-items: center;
+  background-image: linear-gradient(180deg,#26235A -1%, #324773 100%);
+}
+
+.slide-content{
+  text-align: center;
+}
+
+.slide-content h1, .slide-content p{
+  color: #fff;
+}
+
+.slide-content h1{
+  text-transform: uppercase;
+  font-weight: 900;
+}
+
+.step-img{
+  max-width: 280px;
+  border-radius: 50%;
+  border: 10px solid #26235A;
+  margin-bottom: 30px;
+}
+
+.first-section{
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.steps{
+  padding: 20px;
+}
+
+.steps-title{
+  color: #D9145C;
+  font-weight: 600;
+}
+
+.divisor{
+  width: 10%;
+  border-top: 5px solid #D9145C;
+}
+
+.btn-main{
+  background-color: #D9145C;
+  padding: 10px 25px;
+  border: none;
+  color: #FFF;
+  text-transform: uppercase;
+  font-weight: 900;
+  border-radius: 50px;
+}
+
+.second-section{
+  background-image: url('./images/bg-cell.jpg');
+  background-size: cover;
+  background-position: center center;
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+}
+
+.second-section h3, .second-section p, .second-section big{
+  color: #FFF;
+}
+
+.second-section big{
+  font-weight: 600;
+}
+
+footer{
+  background-color: #26235A;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 0px 20px 0px;
+}
+
+footer p{
+  color: #FFF;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -14,12 +104,12 @@
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  background-color: #26235A;
+  max-height: 100px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  align-items: left;
+  justify-content: left;
   font-size: calc(10px + 2vmin);
   color: white;
 }
