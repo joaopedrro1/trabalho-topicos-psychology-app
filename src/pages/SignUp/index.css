@@ -1,0 +1,47 @@
+input{
+    display: block;
+    border-radius: 50px;
+    padding: 10px 20px;
+    margin-bottom: 10px;
+    border: 2px solid #cecece;
+    color: #7E7A7A;
+    font-weight: bold;
+}
+
+
+.login{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100%;
+    background-image: linear-gradient(180deg,#26235A -1%, #324773 100%);
+    padding: 0px 20px;
+}
+
+.form-login{
+    text-align: center;
+    margin: 0px 10px;
+}
+
+.img-destaque{
+    max-width: 250px;
+    border-radius: 50%;
+    border: 10px solid #D9145C;
+    margin-bottom: 30px;
+    max-height: 250px;
+  }
+
+
+.forgot-pass-link, .signup-link{
+    color: #FFF !important;
+    display: block;
+}
+
+.signup-link{
+    font-weight: bold;
+}
+
+.form-title, .form-desc{
+    color: #FFF;
+}

@@ -9,10 +9,65 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+p{
+  color: #7E7A7A;
+}
+
+input{
+  display: block;
+  border-radius: 50px;
+  padding: 10px 20px;
+  margin-bottom: 10px;
+  border: 2px solid #cecece;
+  color: #7E7A7A;
+  font-weight: bold;
+  width: 100%;
+}
+
 h1, h2, h3, h4, h5, h6{
   color: #26235A;
   font-weight: bold;
+  margin-bottom: 10px;
 }
+
+.btn-primary{
+  background-color: #D9145C;
+  padding: 10px 40px;
+  border: none;
+  color: #FFF;
+  text-transform: uppercase;
+  font-weight: 900;
+  border-radius: 50px;
+  margin-bottom: 20px;
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+.btn-primary:hover, .btn-primary:focus, .btn-primary:focus, .btn-primary:not(:disabled):not(.disabled).active, 
+.btn-primary:not(:disabled):not(.disabled):active, .show > .btn-primary.dropdown-toggle{
+  background-color: #dc2b6c;
+}
+
+.btn-secondary{
+  background-color: #26235A;
+  padding: 10px 40px;
+  border: none;
+  color: #FFF;
+  text-transform: uppercase;
+  font-weight: 900;
+  border-radius: 50px;
+  margin-bottom: 20px;
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+.btn-secondary:hover, .btn-secondary:focus, .btn-secondary:focus, .btn-secondary:not(:disabled):not(.disabled).active, 
+.btn-secondary:not(:disabled):not(.disabled):active, .show > .btn-secondary.dropdown-toggle{
+  background-color: #324773;
+}
+
+.container{
+  max-width: 1280px;
+}
+
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
