@@ -8,7 +8,6 @@ input{
     font-weight: bold;
 }
 
-
 .login{
     display: flex;
     align-items: center;
@@ -16,11 +15,12 @@ input{
     height: 100vh;
     width: 100%;
     background-image: linear-gradient(180deg,#26235A -1%, #324773 100%);
-    padding: 20px;
+    padding: 0px 20px;
 }
 
 .form-login{
     text-align: center;
+    margin: 0px 10px;
 }
 
 .img-destaque{

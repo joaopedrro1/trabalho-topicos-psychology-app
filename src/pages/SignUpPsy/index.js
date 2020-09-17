@@ -3,7 +3,7 @@ import './index.css';
 import Img1 from '../../images/img1.png';
 
 
-function SignUp() {
+function SignUpPsy() {
     return (
       <div className="login">
         <div class="form-login">
@@ -44,4 +44,4 @@ function SignUp() {
     );
   }
 
-  export default SignUp;
+  export default SignUpPsy;

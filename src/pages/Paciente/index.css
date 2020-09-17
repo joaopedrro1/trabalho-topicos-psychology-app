@@ -1,0 +1,150 @@
+h1{
+    color: #fff;
+}
+
+.top-bar{
+    background-color: #26235A;
+    padding: 20px 0px;
+}
+
+.top-bar-content{
+    display: flex;
+    align-items: center;
+}
+
+.profile-pic-content{
+    width: 15%;
+}
+
+.psy-info-content{
+    width: 70%;
+}
+
+.btn-icons-content{
+    width: 15%;
+    text-align: right;
+}
+
+.align-center{
+    align-items: center;
+}
+
+.align-right{
+    text-align: right;
+}
+
+.paciente-name{
+    color: #D9145C;
+    margin-bottom: 5px;
+}
+
+.btn-accept, .btn-decline{
+    margin: 10px;
+}
+
+.call{
+    padding: 30px 15px;
+    text-align: center;
+}
+
+.history-content{
+    padding: 10px 0px;
+}
+
+.edit-info{
+    padding: 30px 0px;
+    background-color: #F7F7F7;
+}
+
+.edit-info-title{
+    margin-bottom: 40px;
+}
+
+.small-container{
+    max-width: 990px;
+    margin: 0 auto;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.btn-edit{
+    width: 32px;
+    height: 32px;
+    margin: 5px;
+}
+
+.btn-logout{
+    width: 32px;
+    height: 32px;
+    margin: 5px;
+}
+
+.paciente-desc{
+    color: #FFF;
+}
+
+.last-chat-text{
+    display: block;
+    color: #7E7A7A;
+}
+
+.clock{
+    width: 52px;
+    height: 52px;
+}
+
+.profile-pic{
+    max-width: 150px;
+    border-radius: 50%;
+    border: 7px solid #D9145C;
+    max-height: 150px;
+}
+
+.align-right{
+    text-align: right;
+}
+
+.edit-info-title{
+    text-transform: uppercase;
+}
+
+.history{
+    padding: 30px 15px;
+}
+
+.history-title{
+    text-transform: uppercase;
+}
+
+@media (max-width: 800px){
+
+
+    .profile-pic{
+        width: 100px;
+    }
+    .top-bar-content{
+        justify-content: space-between;
+    }
+
+    .profile-pic-content{
+        width: auto;
+    }
+    
+    .psy-info-content{
+        width: auto;
+    }
+    
+    .btn-icons-content{
+        width: auto;
+    }
+
+    .btn-edit{
+        width: 25px;
+        height: 25px;
+    }
+
+    .btn-logout{
+        width: 25px;
+        height: 25px;
+    }
+}
