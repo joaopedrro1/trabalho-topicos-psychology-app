@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="51" height="49" viewBox="0 0 51 49">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Retângulo_30" data-name="Retângulo 30" width="51" height="49" transform="translate(35 170)" fill="#fff" stroke="#707070" stroke-width="1"/>
+    </clipPath>
+  </defs>
+  <g id="Grupo_de_máscara_8" data-name="Grupo de máscara 8" transform="translate(-35 -170)" clip-path="url(#clip-path)">
+    <g id="logout" transform="translate(36 170)">
+      <path id="Caminho_12" data-name="Caminho 12" d="M30.625,26.542a2.041,2.041,0,0,0-2.042,2.042V36.75a2.044,2.044,0,0,1-2.042,2.042H20.417V8.167a4.115,4.115,0,0,0-2.781-3.881l-.6-.2h9.51a2.044,2.044,0,0,1,2.042,2.042V12.25a2.042,2.042,0,1,0,4.083,0V6.125A6.132,6.132,0,0,0,26.542,0H4.594a1.6,1.6,0,0,0-.218.045C4.277.037,4.183,0,4.083,0A4.087,4.087,0,0,0,0,4.083v36.75a4.115,4.115,0,0,0,2.781,3.881l12.287,4.1a4.227,4.227,0,0,0,1.266.19,4.087,4.087,0,0,0,4.083-4.083V42.875h6.125a6.132,6.132,0,0,0,6.125-6.125V28.583a2.041,2.041,0,0,0-2.042-2.042Zm0,0" fill="#fff"/>
+      <path id="Caminho_13" data-name="Caminho 13" d="M48.4,18.974l-8.167-8.167A2.041,2.041,0,0,0,36.75,12.25v6.125H28.583a2.042,2.042,0,1,0,0,4.083H36.75v6.125a2.041,2.041,0,0,0,3.485,1.444L48.4,21.86a2.039,2.039,0,0,0,0-2.887Zm0,0" fill="#fff"/>
+    </g>
+  </g>
+</svg>
