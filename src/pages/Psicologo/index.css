@@ -23,6 +23,21 @@ h1{
     margin: 10px;
 }
 
+.psy-info-content{
+    width: 80%;
+    display: flex;
+    align-items: center;
+}
+
+.psy-info{
+    padding: 20px;
+}
+
+.btn-icons-content{
+    width: 20%;
+    text-align: right;
+}
+
 .call{
     padding: 30px 0px;
     text-align: center;
@@ -30,6 +45,8 @@ h1{
 
 .history-content{
     padding: 10px 0px;
+    display: flex;
+    align-items: center;
 }
 
 .edit-info{
@@ -65,6 +82,12 @@ h1{
     height: 52px;
 }
 
+.clock-icon, .last-chat{
+    display: inline-block;
+    width: auto;
+    padding: 10px;
+}
+
 .profile-pic{
     max-width: 150px;
     border-radius: 50%;
@@ -78,4 +101,53 @@ h1{
 
 .edit-info-title{
     text-transform: uppercase;
+}
+
+.divisor-section-blue{
+    color: #26235a;
+}
+
+.accept-decline{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 20px;
+}
+
+@media (max-width: 800px){
+
+    .clock{
+        width: 42px;
+        height: 42px;
+    }
+
+    .profile-pic{
+        width: 100px;
+    }
+
+    .psy-info{
+        padding: 10px;
+    }
+
+    .top-bar-content{
+        justify-content: space-between;
+    }
+    
+    .psy-info-content{
+        width: auto;
+    }
+    
+    .btn-icons-content{
+        width: auto;
+    }
+
+    .btn-edit{
+        width: 25px;
+        height: 25px;
+    }
+
+    .btn-logout{
+        width: 25px;
+        height: 25px;
+    }
 }

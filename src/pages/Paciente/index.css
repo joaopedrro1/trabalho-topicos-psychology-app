@@ -12,16 +12,18 @@ h1{
     align-items: center;
 }
 
-.profile-pic-content{
-    width: 15%;
+.user-info-content{
+    width: 80%;
+    display: flex;
+    align-items: center;
 }
 
-.psy-info-content{
-    width: 70%;
+.user-info{
+    padding: 20px;
 }
 
 .btn-icons-content{
-    width: 15%;
+    width: 20%;
     text-align: right;
 }
 
@@ -49,6 +51,24 @@ h1{
 
 .history-content{
     padding: 10px 0px;
+    display: flex;
+    align-items: center;
+}
+
+.last-chat-text{
+    display: block;
+    color: #7E7A7A;
+}
+
+.clock{
+    width: 52px;
+    height: 52px;
+}
+
+.clock-icon, .last-chat{
+    display: inline-block;
+    width: auto;
+    padding: 10px;
 }
 
 .edit-info{
@@ -118,19 +138,24 @@ h1{
 
 @media (max-width: 800px){
 
+    .clock{
+        width: 42px;
+        height: 42px;
+    }
 
     .profile-pic{
         width: 100px;
     }
+
+    .user-info{
+        padding: 10px;
+    }
+
     .top-bar-content{
         justify-content: space-between;
     }
-
-    .profile-pic-content{
-        width: auto;
-    }
     
-    .psy-info-content{
+    .user-info-content{
         width: auto;
     }
     

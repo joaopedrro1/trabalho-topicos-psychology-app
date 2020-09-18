@@ -3,27 +3,31 @@ import './index.css';
 import Img1 from '../../images/img1.png';
 import Edit from '../../images/edit.svg';
 import Clock from '../../images/clock.svg';
+import Logout from '../../images/logout.svg';
 
 function Psicologo() {
     return (
-      <div className="painel">
+      <div className="painel-psicologo">
         <div className="top-bar">
-        <div className="container">
-        <div className="row align-center">
-            <div className="col-md-2">
-                <img className="profile-pic" src={Img1} />
-            </div>
-            <div class="col-md-8">
-                <h4 className="psicologo-name">João Pedro</h4>
-                <h5 className="psicologo-desc">Psicológo</h5>
-            </div>
-            <div class="col-md-2 align-right">
+          <div className="container">
+            <div className="top-bar-content">
+              <div className="psy-info-content">
+                <div class="profile-pic-content">
+                  <img className="profile-pic" src={Img1} />
+                </div>
+                <div class="psy-info">
+                  <h4 className="psicologo-name">João Pedro</h4>
+                  <h5 className="psicologo-desc">Psicólogo</h5>
+                </div>
+              </div>
+              <div class="btn-icons-content">
                 <img className="btn-edit" src={Edit} />
+                <img className="btn-logout" src={Logout} />
+              </div>
             </div>
-            </div>
+          </div>
         </div>
-        </div>
-        <div className="call">
+        <div className="call container">
             <h4>Você tem uma chamada</h4>
             <div class="accept-decline">
                 <button className="btn-primary btn-accept">
@@ -33,30 +37,27 @@ function Psicologo() {
                     Recusar
                 </button>
             </div>
+            <hr className="divisor-section-blue"></hr>
         </div>
-        <hr className="divisor-section"></hr>
-        <div className="history">
+        <div className="history container">
+          <h4>HISTÓRICO</h4>
             <div className="history-content history-1 container align-center">
-                <div className="row">
-                    <div className="col-md-2 align-right clock-icon">
+                <div className="clock-icon">
                     <img className="clock" src={Clock} />
-                    </div>
-                    <div className="col-md-10 last-chat">
+                </div>
+                <div className="last-chat">
                         <span className="last-chat-text chat-line-1">Conversa iniciada</span>
                         <span className="last-chat-text chat-line-2">as 14h terminada as 14h30</span>
-                    </div>
                 </div>
             </div>
             <hr className="divisor-section"></hr>
             <div className="history-content history-2 container align-center">
-                <div className="row">
-                    <div className="col-md-2 align-right clock-icon">
+                <div className="clock-icon">
                     <img className="clock" src={Clock} />
-                    </div>
-                    <div className="col-md-10 last-chat">
-                        <span className="last-chat-text chat-line-1">Conversa iniciada</span>
-                        <span className="last-chat-text chat-line-2">as 14h terminada as 14h30</span>
-                    </div>
+                </div>
+                <div className="last-chat">
+                    <span className="last-chat-text chat-line-1">Conversa iniciada</span>
+                    <span className="last-chat-text chat-line-2">as 14h terminada as 14h30</span>
                 </div>
             </div>
             <hr className="divisor-section"></hr>
