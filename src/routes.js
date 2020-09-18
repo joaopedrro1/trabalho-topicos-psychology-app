@@ -8,6 +8,7 @@ import SignInPsy from './pages/SignInPsy/index.js';
 import SignUpPsy from './pages/SignUpPsy/index.js';
 import Psicologo from './pages/Psicologo/index.js';
 import Paciente from './pages/Paciente/index.js';
+import Chat from './pages/Chat/index.js';
 
 function Routes(){
     return(
@@ -20,6 +21,7 @@ function Routes(){
                 <Route path="/login" component={SignInUser} />
                 <Route path="/cadastro" component={SignUpUser} />
                 <Route path="/paciente" component={Paciente} />
+				<Route path="/chat" component={Chat} />
             </Switch>
         </BrowserRouter>
     );
