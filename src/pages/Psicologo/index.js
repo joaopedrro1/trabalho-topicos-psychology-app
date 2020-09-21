@@ -30,7 +30,7 @@ function Psicologo() {
         </div>
         <div className="call container">
             <h4>Você tem uma chamada</h4>
-            <div class="accept-decline">
+            <div className="accept-decline">
                 <button className="btn-primary btn-accept">
                     Aceitar
                 </button>

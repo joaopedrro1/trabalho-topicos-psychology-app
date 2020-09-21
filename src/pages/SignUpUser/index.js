@@ -6,7 +6,7 @@ import Img1 from '../../images/img1.png';
 function SignUpUser() {
     return (
       <div className="login">
-        <div class="form-login">
+        <div className="form-login">
         <img className="img-destaque" src={Img1} />
         <h2 className="form-title">Usuário</h2>
         <p className="form-desc">Faça seu cadastro na plataforma</p>

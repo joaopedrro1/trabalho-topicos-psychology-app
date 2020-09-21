@@ -6,7 +6,7 @@ import Img5 from '../../images/img5.png';
 function SignUpPsy() {
     return (
       <div className="login">
-        <div class="form-login">
+        <div className="form-login">
         <img className="img-destaque" src={Img5} />
         <h2 className="form-title">Psicológo</h2>
         <p className="form-desc">Faça seu cadastro na plataforma</p>
