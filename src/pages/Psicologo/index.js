@@ -80,7 +80,7 @@ function Psicologo() {
             </div>
             </div>
             <div className="row">
-            <div class="col-md-4">
+            <div className="col-md-4">
               <input type="date" name="data-nasc" placeholder="Data Nasc.">
               </input>
             </div>

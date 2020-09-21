@@ -51,7 +51,7 @@ function Paciente() {
             <hr className="divisor-section"></hr>
         </div>
         <div className="edit-info">
-            <div class="container">
+            <div className="container">
               <h4 className="edit-info-title">Editar informações</h4>
             </div>
             <div className="small-container">
