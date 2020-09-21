@@ -12,7 +12,7 @@ function Paciente() {
           <div className="container">
             <div className="top-bar-content">
               <div className="user-info-content">
-                <div class="profile-pic-content">
+                <div className="profile-pic-content">
                   <img className="profile-pic" src={UserDefault} />
                 </div>
                 <div class="user-info">
