@@ -15,12 +15,12 @@ function Paciente() {
                 <div className="profile-pic-content">
                   <img className="profile-pic" src={UserDefault} />
                 </div>
-                <div class="user-info">
+                <div className="user-info">
                   <h4 className="paciente-name">João Pedro</h4>
                   <h5 className="paciente-desc">Paciente</h5>
                 </div>
               </div>
-              <div class="btn-icons-content">
+              <div className="btn-icons-content">
                 <img className="btn-edit" src={Edit} />
                 <img className="btn-logout" src={Logout} />
               </div>

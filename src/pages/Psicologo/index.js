@@ -16,12 +16,12 @@ function Psicologo() {
                 <div class="profile-pic-content">
                   <img className="profile-pic" src={UserDefault} />
                 </div>
-                <div class="psy-info">
+                <div className="psy-info">
                   <h4 className="psicologo-name">João Pedro</h4>
                   <h5 className="psicologo-desc">Psicólogo</h5>
                 </div>
               </div>
-              <div class="btn-icons-content">
+              <div className="btn-icons-content">
                 <img className="btn-edit" src={Edit} />
                 <img className="btn-logout" src={Logout} />
               </div>

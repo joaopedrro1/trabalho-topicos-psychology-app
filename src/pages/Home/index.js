@@ -21,7 +21,7 @@ function Home() {
       <div className="first-section container">
         <h2>Como funciona?</h2>
         <hr className="divisor"></hr>
-        <div class="row">
+        <div className="row">
           <div className="col-md-3 steps">
             <img className="step-img" src={Img1}/>
             <h4 className="steps-title">1. Rápido</h4>
