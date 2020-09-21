@@ -1,9 +1,9 @@
 import React from 'react';
 import './index.css';
-import Img1 from '../../images/img1.png';
 import Edit from '../../images/edit.svg';
 import Clock from '../../images/clock.svg';
 import Logout from '../../images/logout.svg';
+import UserDefault from '../../images/user-default-icon.jpg';
 
 function Paciente() {
     return (
@@ -13,7 +13,7 @@ function Paciente() {
             <div className="top-bar-content">
               <div className="user-info-content">
                 <div class="profile-pic-content">
-                  <img className="profile-pic" src={Img1} />
+                  <img className="profile-pic" src={UserDefault} />
                 </div>
                 <div class="user-info">
                   <h4 className="paciente-name">João Pedro</h4>
@@ -54,28 +54,28 @@ function Paciente() {
             <div class="container">
               <h4 className="edit-info-title">Editar informações</h4>
             </div>
-            <div class="small-container">
+            <div className="small-container">
               <form>
-                <div class="row">
-                  <div class="col-md-6">
+                <div className="row">
+                  <div className="col-md-6">
                     <input type="email" name="email" placeholder="Nome">
                     </input>
                   </div>
-                  <div class="col-md-6">
+                  <div className="col-md-6">
                     <input type="email" placeholder="E-mail">
                     </input>
                   </div>
                 </div>
-                <div class="row">
+                <div className="row">
                   <div class="col-md-4">
                     <input type="date" name="data-nasc" placeholder="Data Nasc.">
                     </input>
                   </div>
-                  <div class="col-md-4">
+                  <div className="col-md-4">
                     <input type="password" placeholder="Senha">
                     </input>
                   </div>
-                  <div class="col-md-4">
+                  <div className="col-md-4">
                     <input type="password" placeholder="Confirmar senha">
                     </input>
                   </div>
