@@ -13,11 +13,11 @@ function Psicologo() {
             <div className="col-md-2">
                 <img className="profile-pic" src={Img1} />
             </div>
-            <div class="col-md-8">
+            <div className="col-md-8">
                 <h4 className="psicologo-name">João Pedro</h4>
                 <h5 className="psicologo-desc">Psicológo</h5>
             </div>
-            <div class="col-md-2 align-right">
+            <div className="col-md-2 align-right">
                 <img className="btn-edit" src={Edit} />
             </div>
             </div>
@@ -25,7 +25,7 @@ function Psicologo() {
         </div>
         <div className="call">
             <h4>Você tem uma chamada</h4>
-            <div class="accept-decline">
+            <div className="accept-decline">
                 <button className="btn-primary btn-accept">
                     Aceitar
                 </button>
@@ -62,31 +62,31 @@ function Psicologo() {
             <hr className="divisor-section"></hr>
         </div>
         <div className="edit-info">
-            <div class="container">
+            <div className="container">
             <h4 className="edit-info-title">Editar informações</h4>
             </div>
-            <div class="small-container">
+            <div className="small-container">
             <form>
-            <div class="row">
-            <div class="col-md-6">
+            <div className="row">
+            <div className="col-md-6">
               <input type="email" name="email" placeholder="Nome">
               </input>
             </div>
-            <div class="col-md-6">
+            <div className="col-md-6">
               <input type="email" placeholder="E-mail">
               </input>
             </div>
             </div>
-            <div class="row">
-            <div class="col-md-4">
+            <div className="row">
+            <div className="col-md-4">
               <input type="date" name="data-nasc" placeholder="Data Nasc.">
               </input>
             </div>
-            <div class="col-md-4">
+            <div className="col-md-4">
               <input type="password" placeholder="Senha">
               </input>
             </div>
-            <div class="col-md-4">
+            <div className="col-md-4">
               <input type="password" placeholder="Confirmar senha">
               </input>
             </div>
