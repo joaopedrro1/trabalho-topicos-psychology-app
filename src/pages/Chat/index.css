@@ -1,0 +1,194 @@
+h1,
+h2,
+h3,
+h4,
+h5 {
+  color: #fff;
+}
+
+.top-bar {
+  background-color: #26235a;
+  padding: 20px 0px;
+  color: #fff;
+}
+
+.top-bar-content {
+  display: flex;
+  align-items: center;
+}
+
+.btn-back-content {
+  width: 15%;
+}
+
+.psy-info-content {
+  width: 70%;
+}
+
+.btn-icons-content {
+  width: 15%;
+  text-align: right;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.align-right {
+  text-align: right;
+}
+
+.paciente-name {
+  color: #d9145c;
+  margin-bottom: 5px;
+}
+
+.btn-accept,
+.btn-decline {
+  margin: 10px;
+}
+
+.call {
+  padding: 30px 15px;
+  text-align: center;
+}
+
+.history-content {
+  padding: 10px 0px;
+}
+
+.edit-info {
+  padding: 30px 0px;
+  background-color: #f7f7f7;
+}
+
+.edit-info-title {
+  margin-bottom: 40px;
+}
+
+.small-container {
+  max-width: 990px;
+  margin: 0 auto;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+.btn-edit {
+  width: 32px;
+  height: 32px;
+  margin: 5px;
+}
+
+.btn-logout {
+  width: 32px;
+  height: 32px;
+  margin: 5px;
+}
+
+.paciente-desc {
+  color: #fff;
+}
+
+.last-chat-text {
+  display: block;
+  color: #7e7a7a;
+}
+
+.clock {
+  width: 52px;
+  height: 52px;
+}
+
+.profile-pic {
+  max-width: 150px;
+  border-radius: 50%;
+  border: 7px solid #d9145c;
+  max-height: 150px;
+}
+
+.align-right {
+  text-align: right;
+}
+
+.edit-info-title {
+  text-transform: uppercase;
+}
+
+.history {
+  padding: 30px 15px;
+}
+
+.history-title {
+  text-transform: uppercase;
+}
+
+.ballon {
+  border-radius: 14px 20px 20px 5px;
+  padding: 9px;
+  width: fit-content;
+}
+.isNotUserBallon {
+  float: left;
+  background: #e6e6e6;
+}
+
+.isUserBallon {
+  float: right;
+  background: #f2e1ad;
+}
+
+.linha::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.chat {
+  height: 75vh;
+  overflow-y: scroll;
+  padding: 15px;
+}
+
+.chat-writer {
+  display: flex;
+  flex-direction: row;
+}
+
+.btn-send {
+  background: #d5165b;
+  border: 0px;
+  border-radius: 32px;
+  width: 50px;
+  height: 50px;
+  margin-left: 5px;
+}
+@media (max-width: 800px) {
+  .profile-pic {
+    width: 100px;
+  }
+  .top-bar-content {
+    justify-content: space-between;
+  }
+
+  .profile-pic-content {
+    width: auto;
+  }
+
+  .psy-info-content {
+    width: auto;
+  }
+
+  .btn-icons-content {
+    width: auto;
+  }
+
+  .btn-edit {
+    width: 25px;
+    height: 25px;
+  }
+
+  .btn-logout {
+    width: 25px;
+    height: 25px;
+  }
+}
