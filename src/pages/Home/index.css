@@ -9,10 +9,11 @@
   
   .slide-home{
     display: flex;
-    min-height: 400px;
     justify-content: center;
     align-items: center;
     background-image: linear-gradient(180deg,#26235A -1%, #324773 100%);
+    min-height: auto !important;
+    padding: 120px 15px;
   }
   
   .slide-content{
@@ -29,7 +30,7 @@
   }
   
   .step-img{
-    max-width: 280px;
+    max-width: 240px;
     border-radius: 50%;
     border: 10px solid #26235A;
     margin-bottom: 30px;
@@ -53,6 +54,7 @@
   .divisor{
     width: 10%;
     border-top: 5px solid #D9145C;
+    margin-bottom: 20px !important;
   }
   
   .btn-primary{
@@ -124,3 +126,20 @@
     }
   }
   
+  @media (max-width: 900px){
+    .step-img{
+      max-width: 180px;
+    }
+  }
+
+  @media (max-width: 766px){
+    .step-img{
+      max-width: 240px;
+    }
+  }
+
+  @media (max-width: 480px){
+    .divisor{
+      width: 20%;
+    }
+  }

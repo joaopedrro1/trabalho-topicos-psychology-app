@@ -23,6 +23,14 @@ input{
     text-align: center;
 }
 
+.form-login span {
+    color: #D9145C;
+}
+
+.form-login button {
+    cursor: pointer;
+}
+
 .img-destaque{
     max-width: 250px;
     border-radius: 50%;
