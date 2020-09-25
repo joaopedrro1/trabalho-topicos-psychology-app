@@ -138,10 +138,14 @@ h5 {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 .linha::after {
 =======
 .ballon::after {
 >>>>>>> Começando chat
+=======
+.linha::after {
+>>>>>>> Iniciando auth
   content: "";
   clear: both;
   display: table;
@@ -152,7 +156,6 @@ h5 {
   overflow-y: scroll;
   padding: 15px;
 }
-<<<<<<< HEAD
 
 .chat-writer {
   display: flex;
@@ -167,8 +170,7 @@ h5 {
   height: 50px;
   margin-left: 5px;
 }
-=======
->>>>>>> Começando chat
+
 @media (max-width: 800px) {
   .profile-pic {
     width: 100px;
