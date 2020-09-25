@@ -137,15 +137,7 @@ h5 {
   background: #f2e1ad;
 }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 .linha::after {
-=======
-.ballon::after {
->>>>>>> Começando chat
-=======
-.linha::after {
->>>>>>> Iniciando auth
   content: "";
   clear: both;
   display: table;
@@ -170,7 +162,6 @@ h5 {
   height: 50px;
   margin-left: 5px;
 }
-
 @media (max-width: 800px) {
   .profile-pic {
     width: 100px;
