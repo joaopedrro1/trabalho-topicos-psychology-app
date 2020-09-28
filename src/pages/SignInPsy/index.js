@@ -41,12 +41,9 @@ function SignInPsy(){
           </Form>
 
           <p>
-          <a className="forgot-pass-link">
-            Esqueceu sua senha?
-          </a>
-          <Link to="/cadastro-psicologo" className="signup-link">
-            Cadastre-se
-          </Link>
+            <Link to="/cadastro-psicologo" className="signup-link">
+              Cadastre-se
+            </Link>
           </p>
         </div>
       </div>
