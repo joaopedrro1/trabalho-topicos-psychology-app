@@ -7,7 +7,7 @@ function SignInUser(){
     return (
       <div className="login">
         <div class="form-login">
-        <img className="img-destaque" src={Img1} />
+        <img className="img-destaque" src={Img1} alt="" />
         <h2 className="form-title">Usuário</h2>
         <p className="form-desc">Faça seu login na plataforma</p>
         <form>
@@ -22,10 +22,8 @@ function SignInUser(){
             </button>
         </form>
           <p>
-          <a className="forgot-pass-link">
-            Esqueceu sua senha?
-          </a>
-          <a class="signup-link">
+
+          <a href class="signup-link">
             Cadastre-se
           </a>
           </p>

@@ -3,7 +3,7 @@ import './index.css';
 import Edit from '../../images/edit.svg';
 import Clock from '../../images/clock.svg';
 import Logout from '../../images/logout.svg';
-import UserDefault from '../../images/user-default-icon.jpg';
+import UserDefault from '../../images/img-4.png';
 
 function Paciente() {
     return (

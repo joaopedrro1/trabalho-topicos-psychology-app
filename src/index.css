@@ -15,7 +15,7 @@ p{
   color: #7E7A7A;
 }
 
-input{
+input, select{
   display: block;
   border-radius: 50px;
   padding: 10px 20px;
@@ -36,6 +36,10 @@ hr{
   border-top: 1px solid #e7e7e7;
 }
 
+button {
+  cursor: pointer;
+}
+
 .btn-primary{
   background-color: #D9145C;
   padding: 10px 40px;
@@ -48,7 +52,7 @@ hr{
   box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
 }
 
-.btn-primary:hover, .btn-primary:focus, .btn-primary:focus, .btn-primary:not(:disabled):not(.disabled).active, 
+.btn-primary:hover, .btn-primary:focus, .btn-primary:focus, .btn-primary:not(:disabled):not(.disabled).active,
 .btn-primary:not(:disabled):not(.disabled):active, .show > .btn-primary.dropdown-toggle{
   background-color: #dc2b6c;
 }
@@ -65,7 +69,7 @@ hr{
   box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
 }
 
-.btn-secondary:hover, .btn-secondary:focus, .btn-secondary:focus, .btn-secondary:not(:disabled):not(.disabled).active, 
+.btn-secondary:hover, .btn-secondary:focus, .btn-secondary:focus, .btn-secondary:not(:disabled):not(.disabled).active,
 .btn-secondary:not(:disabled):not(.disabled):active, .show > .btn-secondary.dropdown-toggle{
   background-color: #324773;
 }
