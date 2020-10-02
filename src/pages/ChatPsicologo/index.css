@@ -6,6 +6,14 @@ h5 {
   color: #fff;
 }
 
+.modal-title > h1,
+h2,
+h3,
+h4,
+h5 {
+  color: #26235a;
+}
+
 .top-bar {
   background-color: #26235a;
   padding: 20px 0px;
@@ -154,18 +162,6 @@ h5 {
   flex-direction: row;
 }
 
-.btn-close {
-  background: #d5165b;
-  border: 0px;
-  border-radius: 32px;
-  margin-left: 40%;
-  color: #fff;
-}
-
-.none {
-  display: none;
-}
-
 .btn-send {
   background: #d5165b;
   border: 0px;
@@ -173,6 +169,10 @@ h5 {
   width: 50px;
   height: 50px;
   margin-left: 5px;
+}
+
+.none {
+  display: none;
 }
 @media (max-width: 800px) {
   .profile-pic {

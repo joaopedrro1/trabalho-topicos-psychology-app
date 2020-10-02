@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import "./index.css";
-import Edit from "../../images/edit.svg";
 import Clock from "../../images/clock.svg";
 import Logout from "../../images/logout.svg";
 import UserDefault from "../../images/img-4.png";
@@ -167,7 +166,7 @@ function Psicologo() {
           <div className="top-bar-content">
             <div className="psy-info-content">
               <div className="profile-pic-content">
-                <img className="profile-pic" src={UserDefault} />
+                <img className="profile-pic" src={UserDefault} alt="" />
               </div>
               <div className="psy-info">
                 <h4 className="psicologo-name">{dados && dados.psy_name}</h4>
@@ -175,12 +174,11 @@ function Psicologo() {
               </div>
             </div>
             <div className="btn-icons-content">
-              <img className="btn-edit" src={Edit} />
-
               <img
                 className="btn-logout logout"
                 src={Logout}
                 onClick={handleSingOut}
+                alt=""
               />
             </div>
           </div>
@@ -198,7 +196,7 @@ function Psicologo() {
         <h4>HISTÓRICO</h4>
         <div className="history-content history-1 container align-center">
           <div className="clock-icon">
-            <img className="clock" src={Clock} />
+            <img className="clock" src={Clock} alt="" />
           </div>
           <div className="last-chat">
             <span className="last-chat-text chat-line-1">
@@ -212,7 +210,7 @@ function Psicologo() {
         <hr className="divisor-section"></hr>
         <div className="history-content history-2 container align-center">
           <div className="clock-icon">
-            <img className="clock" src={Clock} />
+            <img className="clock" src={Clock} alt="" />
           </div>
           <div className="last-chat">
             <span className="last-chat-text chat-line-1">

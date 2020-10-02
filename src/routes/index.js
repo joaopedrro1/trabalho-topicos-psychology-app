@@ -1,7 +1,7 @@
 import React from "react";
 import { Switch } from "react-router-dom";
 
-import Route from './Route';
+import Route from "./Route";
 
 import Home from "../pages/Home/index.js";
 import SignInUser from "../pages/SignInUser/index.js";
@@ -10,6 +10,8 @@ import SignInPsy from "../pages/SignInPsy/index.js";
 import SignUpPsy from "../pages/SignUpPsy/index.js";
 import Psicologo from "../pages/Psicologo/index.js";
 import Paciente from "../pages/Paciente/index.js";
+import Chat from "../pages/Chat";
+import ChatPsicologo from "../pages/ChatPsicologo";
 
 function Routes() {
   return (
@@ -17,10 +19,15 @@ function Routes() {
       <Route path="/" exact component={Home} />
       <Route path="/login-psicologo" exact component={SignInPsy} />
       <Route path="/cadastro-psicologo" exact component={SignUpPsy} />
-      <Route path="/psicologo" exact isPrivate component={Psicologo} />
+
       <Route path="/login" exact component={SignInUser} />
       <Route path="/cadastro" exact component={SignUpUser} />
-      <Route path="/paciente" component={Paciente} />
+
+      <Route path="/chat/:sala" exact component={Chat} />
+      <Route path="/chat/:sala/psicologo" exact component={ChatPsicologo} />
+
+      <Route path="/psicologo" exact isPrivate component={Psicologo} />
+      <Route path="/paciente" exact isPrivate component={Paciente} />
     </Switch>
   );
 }

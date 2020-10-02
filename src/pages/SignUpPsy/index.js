@@ -2,22 +2,22 @@ import React from "react";
 import "./index.css";
 import Img5 from "../../images/img-4.png";
 
-import { Form, Input } from '@rocketseat/unform';
-import * as Yup from 'yup';
-import { Link, useHistory } from 'react-router-dom';
-import api from '../../services/api';
-import { toast } from 'react-toastify';
+import { Form, Input } from "@rocketseat/unform";
+import * as Yup from "yup";
+import { Link, useHistory } from "react-router-dom";
+import api from "../../services/api";
+import { toast } from "react-toastify";
 
 const schema = Yup.object().shape({
-  psy_name: Yup.string().required('O Nome é obrigatório!'),
+  psy_name: Yup.string().required("O Nome é obrigatório!"),
   psy_email: Yup.string()
-    .email('Insira um E-mail válido!')
-    .required('O E-mail é obrigatório!'),
-  psy_password: Yup.string().required('A Senha é obrigatória!'),
-  psy_data_nasc: Yup.string().required('Data de nascimento obrigatória'),
-  psy_crp: Yup.string().required('O CRP é obrigatório!'),
-  psy_cpf: Yup.string().required('O CPF é obrigatório!'),
-  psy_city: Yup.string().required('A cidade é obrigatória!'),
+    .email("Insira um E-mail válido!")
+    .required("O E-mail é obrigatório!"),
+  psy_password: Yup.string().required("A Senha é obrigatória!"),
+  psy_data_nasc: Yup.string().required("Data de nascimento obrigatória"),
+  psy_crp: Yup.string().required("O CRP é obrigatório!"),
+  psy_cpf: Yup.string().required("O CPF é obrigatório!"),
+  psy_city: Yup.string().required("A cidade é obrigatória!"),
 });
 
 function SignUpPsy() {
@@ -25,7 +25,7 @@ function SignUpPsy() {
 
   async function handleSubmit(data) {
     try {
-      await api.post('psychologist', {
+      await api.post("psychologist", {
         psy_name: data.psy_name,
         psy_email: data.psy_email,
         psy_password: data.psy_password,
@@ -35,11 +35,10 @@ function SignUpPsy() {
         psy_city: data.psy_city,
       });
 
-      history.push('/login-psicologo');
-      toast.success('Cadastrado com sucesso!');
-
+      history.push("/login-psicologo");
+      toast.success("Cadastrado com sucesso!");
     } catch (error) {
-      toast.error('Erro ao cadastrar-se, verifique seus dados!');
+      toast.error("Erro ao cadastrar-se, verifique seus dados!");
     }
   }
 
@@ -49,6 +48,7 @@ function SignUpPsy() {
         <img className="img-destaque" src={Img5} />
         <h2 className="form-title">Psicológo</h2>
         <p className="form-desc">Faça seu cadastro na plataforma</p>
+
         <Form onSubmit={handleSubmit} schema={schema}>
           <div className="row">
             <div className="col-md-6">
@@ -64,7 +64,11 @@ function SignUpPsy() {
               <Input type="password" name="psy_password" placeholder="Senha" />
             </div>
             <div className="col-md-6">
-              <Input type="date" name="psy_data_nasc" placeholder="Data Nasc." />
+              <Input
+                type="date"
+                name="psy_data_nasc"
+                placeholder="Data Nasc."
+              />
             </div>
           </div>
 
@@ -79,11 +83,13 @@ function SignUpPsy() {
               <Input type="text" name="psy_city" placeholder="Cidade" />
             </div>
           </div>
-          <button type="submit" className="btn-login btn-primary">Cadastrar</button>
+          <button type="submit" className="btn-login btn-primary">
+            Cadastrar
+          </button>
 
           <Link to="/login-psicologo" className="signup-link">
-              Voltar
-            </Link>
+            Voltar / Login
+          </Link>
         </Form>
       </div>
     </div>
