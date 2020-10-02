@@ -52,15 +52,22 @@ function Home() {
         <div className="second-section">
           <div className="container">
             <div>
+              <h3>Faça Login</h3>
+              <Link className="links" to="/login">Paciente</Link>
+
+              <Link className="links" to="/login-psicologo">Psicólogo</Link>
+
+              <br/> <br/>
               <h3>Cadastre-se</h3>
               <p>Se preferir, você pode se cadastrar na plataforma e ter acesso ao seu histórico de conversas
               </p>
-              <button className="btn-primary">
-              <Link to="/cadastro">Quero me cadastrar</Link>
-              </button> 
-            </div> 
+
+              <Link className="links" to="/cadastro">Cadastro Paciente</Link>
+              <Link className="links" to="/cadastro-psicologo">Cadastro Psicólogo</Link>
+
+            </div>
           </div>
-        </div> 
+        </div>
       <footer>
         <p>Todos os direitos reservados. 2020.</p>
       </footer>

@@ -2,11 +2,11 @@
     max-width: 100px;
     pointer-events: none;
   }
-  
+
   .container{
     max-width: 1280px;
   }
-  
+
   .slide-home{
     display: flex;
     justify-content: center;
@@ -15,20 +15,20 @@
     min-height: auto !important;
     padding: 120px 15px;
   }
-  
+
   .slide-content{
     text-align: center;
   }
-  
+
   .slide-content h1, .slide-content p{
     color: #fff;
   }
-  
+
   .slide-content h1{
     text-transform: uppercase;
     font-weight: 900;
   }
-  
+
   .step-img{
     max-width: 240px;
     border-radius: 50%;
@@ -36,27 +36,27 @@
     margin-bottom: 30px;
     max-height: 280px;
   }
-  
+
   .first-section{
     padding: 60px 20px;
     text-align: center;
   }
-  
+
   .steps{
     padding: 20px;
   }
-  
+
   .steps-title{
     color: #D9145C;
     font-weight: 600;
   }
-  
+
   .divisor{
     width: 10%;
     border-top: 5px solid #D9145C;
     margin-bottom: 20px !important;
   }
-  
+
   .btn-primary{
     background-color: #D9145C;
     padding: 10px 40px;
@@ -66,7 +66,7 @@
     font-weight: 900;
     border-radius: 50px;
   }
-  
+
   .second-section{
     background-image: url('../../images/bg-cell.jpg');
     background-size: cover;
@@ -75,15 +75,15 @@
     display: flex;
     align-items: center;
   }
-  
+
   .second-section h3, .second-section p, .second-section big{
     color: #FFF;
   }
-  
+
   .second-section big{
     font-weight: 600;
   }
-  
+
   footer{
     background-color: #26235A;
     display: flex;
@@ -91,17 +91,17 @@
     align-items: center;
     padding: 40px 0px 20px 0px;
   }
-  
+
   footer p{
     color: #FFF;
   }
-  
+
   @media (prefers-reduced-motion: no-preference) {
     .App-logo {
       animation: App-logo-spin infinite 20s linear;
     }
   }
-  
+
   .App-header {
     background-color: #26235A;
     max-height: 100px;
@@ -112,11 +112,30 @@
     font-size: calc(10px + 2vmin);
     color: white;
   }
-  
+
+  .links {
+    text-decoration: none;
+    font-weight: bold;
+    color: #FFF;
+    background: #D9145C;
+    height: 38px;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 19px;
+    transition: background 0.2s;
+  }
+
+  .links:hover {
+    text-decoration: none;
+    color: #FFF;
+    background: #26235A;
+
+  }
+
   .App-link {
     color: #61dafb;
   }
-  
+
   @keyframes App-logo-spin {
     from {
       transform: rotate(0deg);
@@ -125,7 +144,7 @@
       transform: rotate(360deg);
     }
   }
-  
+
   @media (max-width: 900px){
     .step-img{
       max-width: 180px;

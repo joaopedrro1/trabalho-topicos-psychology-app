@@ -19,12 +19,15 @@ function Routes() {
       <Route path="/" exact component={Home} />
       <Route path="/login-psicologo" exact component={SignInPsy} />
       <Route path="/cadastro-psicologo" exact component={SignUpPsy} />
-      <Route path="/psicologo" exact isPrivate component={Psicologo} />
+
       <Route path="/login" exact component={SignInUser} />
       <Route path="/cadastro" exact component={SignUpUser} />
-      <Route path="/paciente" component={Paciente} />
+
       <Route path="/chat/:sala" exact component={Chat} />
       <Route path="/chat/:sala/psicologo" exact component={ChatPsicologo} />
+
+      <Route path="/psicologo" exact isPrivate component={Psicologo} />
+      <Route path="/paciente" exact isPrivate component={Paciente} />
     </Switch>
   );
 }

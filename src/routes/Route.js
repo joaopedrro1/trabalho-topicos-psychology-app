@@ -13,28 +13,38 @@ const Route = ({
   component: Component,
   ...rest
 }) => {
-  const { psychologist } = useAuth();
+  const { psychologist, patient } = useAuth();
+
+  console.log(psychologist);
+  console.log(patient);
+
+  function teste(url, urlDefault, location, tipo) {
+    return isPrivate === !!tipo ? (
+      isPrivate ? (
+        <DefaultLayout>
+          <Component {...rest} />
+        </DefaultLayout>
+      ) : (
+        <Component {...rest} />
+      )
+    ) : (
+      <Redirect
+        to={{
+          pathname: isPrivate ? url : urlDefault,
+          state: { from: location },
+        }}
+      />
+    );
+  }
+
 
   return (
     <ReactDOMRoute
       {...rest}
       render={({ location }) => {
-        return isPrivate === !!psychologist ? (
-          isPrivate ? (
-            <DefaultLayout>
-              <Component {...rest} />
-            </DefaultLayout>
-          ) : (
-            <Component {...rest} />
-          )
-        ) : (
-          <Redirect
-            to={{
-              pathname: isPrivate ? '/login-psicologo' : '/psicologo',
-              state: { from: location },
-            }}
-          />
-        );
+        return patient
+        ? teste('/login', '/paciente', location, patient)
+        : teste('/login-psicologo', '/psicologo', location, psychologist)
       }}
     />
   );

@@ -99,6 +99,9 @@ h1{
     margin: 5px;
 }
 
+.logout {
+  cursor: pointer;
+}
 .paciente-desc{
     color: #FFF;
 }
@@ -154,11 +157,11 @@ h1{
     .top-bar-content{
         justify-content: space-between;
     }
-    
+
     .user-info-content{
         width: auto;
     }
-    
+
     .btn-icons-content{
         width: auto;
     }
