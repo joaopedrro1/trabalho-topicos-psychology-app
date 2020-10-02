@@ -54,6 +54,12 @@ h1{
     background-color: #F7F7F7;
 }
 
+.edit-availability {
+  padding: 30px 0px;
+  padding-bottom: 120px;
+  background-color: #fff;
+}
+
 .edit-info-title{
     margin-bottom: 40px;
 }
@@ -69,7 +75,40 @@ h1{
 }
 
 .psicologo-desc{
-    color: #FFF;
+  color: #FFF;
+}
+
+.button-availab {
+  border: 0;
+  outline: 0;
+  background: #26235A;
+  color: #fff;
+  font-size: 20px;
+  padding: 8px;
+  margin-bottom: 22px;
+  border-radius: 8px;
+  transition: background 0.3s;
+}
+
+.button-availab:hover {
+  background: #324773;
+}
+
+.hours {
+  padding-left: 15px;
+}
+
+.hours p {
+  padding-right: 5px;
+}
+
+.del-availability p{
+  color: #D9145C;
+  cursor: pointer;
+}
+
+.del-availability p:hover {
+  color: #dc2b6c;
 }
 
 .last-chat-text{
@@ -114,6 +153,15 @@ h1{
     padding-bottom: 20px;
 }
 
+.logout {
+  cursor: pointer;
+}
+
+.buttons-form {
+  display: flex;
+  justify-content: space-between;
+}
+
 @media (max-width: 800px){
 
     .clock{
@@ -132,11 +180,11 @@ h1{
     .top-bar-content{
         justify-content: space-between;
     }
-    
+
     .psy-info-content{
         width: auto;
     }
-    
+
     .btn-icons-content{
         width: auto;
     }
