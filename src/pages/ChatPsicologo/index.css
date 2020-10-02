@@ -6,6 +6,14 @@ h5 {
   color: #fff;
 }
 
+.modal-title > h1,
+h2,
+h3,
+h4,
+h5 {
+  color: #26235a;
+}
+
 .top-bar {
   background-color: #26235a;
   padding: 20px 0px;

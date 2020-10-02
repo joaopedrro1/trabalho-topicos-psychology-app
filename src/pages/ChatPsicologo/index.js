@@ -5,17 +5,22 @@ import Enviar from "../../images/enviar.svg";
 import api from "../../services/api";
 
 function ChatPsicologo(props) {
-  const [texto, setTexto] = useState();
-  const [conversa, setConversa] = useState([]);
-  const [socket, setSocket] = useState(io("http://localhost:3333"));
+  const [text, setText] = useState("");
+  const [history, setHistory] = useState([]);
   const [call, setCall] = useState({});
-  const chatRef = createRef();
-  const chatWriterRef = createRef();
+  const [observation, setObservation] = useState("");
+
   const [isOpen, setIsOpen] = useState(true);
 
+  const [socket, setSocket] = useState(io("http://localhost:3333"));
+
+  const chatRef = createRef();
+  const chatWriterRef = createRef();
+
+  const id = props.computedMatch.params.sala;
+
   async function getCall(id) {
-    api.get(`http://localhost:3333/Call/${id}`).then(async function (response) {
-      console.log(response);
+    await api.get(`http://localhost:3333/Call/${id}`).then(function (response) {
       setCall(response.data);
       if (response.data.cal_end != null) {
         setIsOpen(false);
@@ -23,14 +28,14 @@ function ChatPsicologo(props) {
     });
   }
 
-  async function getHistorico(id) {
-    api
+  async function getHistory(id) {
+    await api
       .get(`http://localhost:3333/Call/${id}/history`)
       .then(function (response) {
         if (response.data.length > 0)
           response.data.map((element) => {
-            setConversa((prevConversa) => [
-              ...prevConversa,
+            setHistory((prevHistory) => [
+              ...prevHistory,
               { text: element.ath_text, isUser: !element.ath_user },
             ]);
           });
@@ -40,19 +45,21 @@ function ChatPsicologo(props) {
   async function close(id) {
     setIsOpen(false);
 
-    await api.delete(`http://localhost:3333/Call/${id}`, {});
+    await api.post(`http://localhost:3333/Call/${id}`, {
+      cal_note: observation,
+    });
     alert("Atendimento encerrado");
   }
 
-  useEffect(() => {
-    console.log(props.computedMatch.params.sala);
-    socket.emit("transfer_room", props.computedMatch.params.sala);
-    getHistorico(props.computedMatch.params.sala);
-    getCall(props.computedMatch.params.sala);
+  useEffect(async () => {
+    socket.emit("transfer_room", id);
+
+    await getCall(id);
+    await getHistory(id);
 
     socket.on("text", function (data) {
-      setConversa((prevConversa) => [
-        ...prevConversa,
+      setHistory((prevHistory) => [
+        ...prevHistory,
         { text: data.text, isUser: false },
       ]);
     });
@@ -60,7 +67,7 @@ function ChatPsicologo(props) {
 
   useEffect(() => {
     chatRef.current.scrollTop = chatRef.current.scrollHeight;
-  }, [conversa]);
+  }, [history]);
 
   return (
     <div className="painel">
@@ -72,7 +79,8 @@ function ChatPsicologo(props) {
               Você está falando com{" "}
               {call.fk_patients === undefined ? "" : call.fk_patients.pat_name}
               <button
-                onClick={() => close(props.computedMatch.params.sala)}
+                data-toggle="modal"
+                data-target="#encerrarModal"
                 className={isOpen ? "btn-close " : "none"}
               >
                 Encerrar atendimento
@@ -83,7 +91,7 @@ function ChatPsicologo(props) {
       </div>
       <div className="container">
         <div className="chat" ref={chatRef}>
-          {conversa.map((element, index) => {
+          {history.map((element, index) => {
             let classeCss = "isUserBallon";
             if (!element.isUser) classeCss = "isNotUserBallon";
             return (
@@ -96,24 +104,23 @@ function ChatPsicologo(props) {
         <div className={isOpen ? "chat-writer " : "none"} ref={chatWriterRef}>
           <input
             type="text"
-            value={texto}
+            value={text}
             onChange={(e) => {
-              setTexto(e.target.value);
+              setText(e.target.value);
             }}
           ></input>
           <button
             className="btn-send"
             onClick={() => {
-              var text = texto;
               if (text != "" && text != null) {
-                setConversa((prevConversa) => [
-                  ...prevConversa,
+                setHistory((prevHistory) => [
+                  ...prevHistory,
                   { text: text, isUser: true },
                 ]);
 
                 socket.emit("text", {
                   text: text,
-                  room: props.computedMatch.params.sala,
+                  room: id,
                   isUser: false,
                 });
               }
@@ -121,6 +128,60 @@ function ChatPsicologo(props) {
           >
             <img src={Enviar} style={{ fill: "white", width: "30px" }} />
           </button>
+        </div>
+      </div>
+
+      <div
+        className="modal fade"
+        id="encerrarModal"
+        role="dialog"
+        aria-labelledby="encerrarModalLabel"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog" role="document">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="encerrarModalLabel">
+                Encerrar atendimento?
+              </h5>
+              <button
+                type="button"
+                className="close"
+                data-dismiss="modal"
+                aria-label="Fechar"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div className="modal-body">
+              <div className="form-group">
+                <p>Se necessário, deixe uma observação sobre o paciente:</p>
+                <textarea
+                  onChange={(e) => {
+                    setObservation(e.target.value);
+                  }}
+                  value={observation}
+                  className="form-control col-12"
+                ></textarea>
+              </div>
+            </div>
+            <div className="modal-footer">
+              <button
+                type="button"
+                className="btn btn-secondary"
+                data-dismiss="modal"
+              >
+                Não
+              </button>
+              <button
+                type="button"
+                className="btn btn-primary"
+                onClick={() => close(id)}
+              >
+                Salvar e fechar
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
