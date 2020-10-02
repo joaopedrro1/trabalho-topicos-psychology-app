@@ -2,25 +2,48 @@ import React, { useState, useEffect, useRef, createRef } from "react";
 import "./index.css";
 import io from "socket.io-client";
 import Enviar from "../../images/enviar.svg";
-import api from "../services/api";
+import api from "../../services/api";
 
 function Chat(props) {
   const [texto, setTexto] = useState();
   const [conversa, setConversa] = useState([]);
   const [socket, setSocket] = useState(io("http://localhost:3333"));
+  const [call, setCall] = useState({});
+  const [isOpen, setIsOpen] = useState(true);
+
   const chatRef = createRef();
+  const chatWriterRef = createRef();
+
+  async function getCall(id) {
+    api.get(`http://localhost:3333/Call/${id}`).then(async function (response) {
+      setCall(response.data);
+
+      if (response.data.cal_end != null) {
+        setIsOpen(false);
+      }
+    });
+  }
 
   async function getHistorico(id) {
     api
-      .post(`http://localhost:3333/Call/${id}/history`)
+      .get(`http://localhost:3333/Call/${id}/history`)
       .then(function (response) {
         console.log(response);
+
+        response.data.map((element) => {
+          setConversa((prevConversa) => [
+            ...prevConversa,
+            { text: element.ath_text, isUser: element.ath_user },
+          ]);
+        });
       });
   }
 
   useEffect(() => {
-    socket.emit("transfer_room", props.match.params.sala);
-    getHistorico(props.match.params.sala);
+    console.log(props.computedMatch.params.sala);
+    socket.emit("transfer_room", props.computedMatch.params.sala);
+    getHistorico(props.computedMatch.params.sala);
+    getCall(props.computedMatch.params.sala);
     socket.on("text", function (data) {
       setConversa((prevConversa) => [
         ...prevConversa,
@@ -40,9 +63,10 @@ function Chat(props) {
           <div className="top-bar-content">
             <div className="btn-back-content"></div>
             <div className="psy-info-content">
-              Você está conversando com <b>João</b>
-              <br />
-              Psicologo da plataforma
+              Você está conversando com{" "}
+              {call.fk_psychologists === undefined
+                ? ""
+                : call.fk_psychologists.psy_name}
             </div>
           </div>
         </div>
@@ -59,7 +83,7 @@ function Chat(props) {
             );
           })}
         </div>
-        <div className="chat-writer">
+        <div className={isOpen ? "chat-writer " : "none"} ref={chatWriterRef}>
           <input
             type="text"
             value={texto}
@@ -67,6 +91,7 @@ function Chat(props) {
               setTexto(e.target.value);
             }}
           ></input>
+
           <button
             className="btn-send"
             onClick={() => {
@@ -79,7 +104,7 @@ function Chat(props) {
 
                 socket.emit("text", {
                   text: text,
-                  room: props.match.params.sala,
+                  room: props.computedMatch.params.sala,
                   isUser: true,
                 });
               }

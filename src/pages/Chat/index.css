@@ -154,6 +154,18 @@ h5 {
   flex-direction: row;
 }
 
+.btn-close {
+  background: #d5165b;
+  border: 0px;
+  border-radius: 32px;
+  margin-left: 40%;
+  color: #fff;
+}
+
+.none {
+  display: none;
+}
+
 .btn-send {
   background: #d5165b;
   border: 0px;
