@@ -24,7 +24,12 @@ function Routes() {
       <Route path="/cadastro" exact component={SignUpUser} />
 
       <Route path="/chat/:sala" exact component={Chat} />
-      <Route path="/chat/:sala/psicologo" exact component={ChatPsicologo} />
+      <Route
+        path="/chat/:sala/psicologo"
+        isPrivate
+        exact
+        component={ChatPsicologo}
+      />
 
       <Route path="/psicologo" exact isPrivate component={Psicologo} />
       <Route path="/paciente" exact isPrivate component={Paciente} />

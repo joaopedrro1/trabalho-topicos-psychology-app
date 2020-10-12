@@ -3,11 +3,24 @@ import "./index.css";
 import io from "socket.io-client";
 import Enviar from "../../images/enviar.svg";
 import api from "../../services/api";
+import { useAuth } from "../../hooks/AuthContext";
+import { useHistory } from "react-router-dom";
 
 function ChatPsicologo(props) {
   const [text, setText] = useState("");
   const [history, setHistory] = useState([]);
-  const [call, setCall] = useState({});
+  const [call, setCall] = useState({
+    id: 0,
+    patient_id: null,
+    psychologist_id: null,
+    cal_start: "2020-10-12T17:38:26.715Z",
+    cal_end: null,
+    cal_note: null,
+    createdAt: "2020-10-12T17:38:26.719Z",
+    updatedAt: "2020-10-12T17:46:03.224Z",
+    fk_patients: null,
+    fk_psychologists: null,
+  });
   const [observation, setObservation] = useState("");
 
   const [isOpen, setIsOpen] = useState(true);
@@ -17,7 +30,9 @@ function ChatPsicologo(props) {
   const chatRef = createRef();
   const chatWriterRef = createRef();
 
+  const { psychologist } = useAuth();
   const id = props.computedMatch.params.sala;
+  const historyRoute = useHistory();
 
   async function getCall(id) {
     await api.get(`http://localhost:3333/Call/${id}`).then(function (response) {
@@ -42,6 +57,12 @@ function ChatPsicologo(props) {
       });
   }
 
+  async function setPsy() {
+    await api.put(`/call/${id}`, {
+      psychologist_id: psychologist.id,
+    });
+  }
+
   async function close(id) {
     setIsOpen(false);
 
@@ -49,6 +70,7 @@ function ChatPsicologo(props) {
       cal_note: observation,
     });
     alert("Atendimento encerrado");
+    // historyRoute.goBack();
   }
 
   useEffect(async () => {
@@ -56,6 +78,7 @@ function ChatPsicologo(props) {
 
     await getCall(id);
     await getHistory(id);
+    await setPsy();
 
     socket.on("text", function (data) {
       setHistory((prevHistory) => [
@@ -77,7 +100,7 @@ function ChatPsicologo(props) {
             <div className="btn-back-content"></div>
             <div className="psy-info-content">
               Você está falando com{" "}
-              {call.fk_patients === undefined ? "" : call.fk_patients.pat_name}
+              {call.fk_patients == null ? "" : call.fk_patients.pat_name}
               <button
                 data-toggle="modal"
                 data-target="#encerrarModal"
@@ -155,11 +178,11 @@ function ChatPsicologo(props) {
             </div>
             <div className="modal-body">
               <div className="form-group">
-                <p>Se necessário, deixe uma observação sobre o paciente:</p>
                 <textarea
                   onChange={(e) => {
                     setObservation(e.target.value);
                   }}
+                  style={{ display: "none" }}
                   value={observation}
                   className="form-control col-12"
                 ></textarea>
@@ -177,8 +200,9 @@ function ChatPsicologo(props) {
                 type="button"
                 className="btn btn-primary"
                 onClick={() => close(id)}
+                data-dismiss="modal"
               >
-                Salvar e fechar
+                fechar
               </button>
             </div>
           </div>

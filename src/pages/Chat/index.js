@@ -54,6 +54,7 @@ function Chat(props) {
 
   useEffect(() => {
     chatRef.current.scrollTop = chatRef.current.scrollHeight;
+    getCall(props.computedMatch.params.sala);
   }, [conversa]);
 
   return (
@@ -64,8 +65,8 @@ function Chat(props) {
             <div className="btn-back-content"></div>
             <div className="psy-info-content">
               Você está conversando com{" "}
-              {call.fk_psychologists === undefined
-                ? ""
+              {call.fk_psychologists == undefined
+                ? "..."
                 : call.fk_psychologists.psy_name}
             </div>
           </div>
