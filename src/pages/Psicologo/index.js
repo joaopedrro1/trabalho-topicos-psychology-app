@@ -259,6 +259,14 @@ function Psicologo() {
                     Conversa não finalizada
                   </span>
                 )}
+
+                <div className="last-chat">
+                  <a href={"/chat/" + call.id + "/psicologo"}>
+                    <button type="submit" className="btn-login btn-primary">
+                      Ver
+                    </button>
+                  </a>
+                </div>
               </div>
               <hr className="divisor-section"></hr>
             </div>

@@ -23,7 +23,9 @@ function Routes() {
       <Route path="/login" exact component={SignInUser} />
       <Route path="/cadastro" exact component={SignUpUser} />
 
-      <Route path="/chat/:sala" exact component={Chat} />
+      <Route path="/chat/:sala" exact isPrivate component={Chat} />
+      <Route path="/chat-anonimo/:sala" exact component={Chat} />
+
       <Route
         path="/chat/:sala/psicologo"
         isPrivate

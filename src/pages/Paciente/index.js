@@ -99,15 +99,17 @@ function Paciente() {
         cal_start: new Intl.DateTimeFormat("pt-br").format(
           new Date(call.cal_start)
         ),
-        cal_end: call.cal_end ? `${new Intl.DateTimeFormat("pt-br").format(
-          new Date(call.cal_end)
-        )}` : null,
+        cal_end: call.cal_end
+          ? `${new Intl.DateTimeFormat("pt-br").format(new Date(call.cal_end))}`
+          : null,
         cal_hour_start: `${new Date(call.cal_start).getHours()}:${new Date(
           call.cal_start
         ).getMinutes()}`,
-        cal_hour_end: call.cal_end ? `${new Date(call.cal_end).getHours()}:${new Date(
-          call.cal_end
-        ).getMinutes()}` : null,
+        cal_hour_end: call.cal_end
+          ? `${new Date(call.cal_end).getHours()}:${new Date(
+              call.cal_end
+            ).getMinutes()}`
+          : null,
       }));
       setCalls(data);
     }
@@ -177,6 +179,11 @@ function Paciente() {
                 ) : (
                   ""
                 )}
+                <div className="last-chat">
+                  <a href={"/chat/" + call.id + "/"}>
+                    <button className="btn-login btn-primary">Ver</button>
+                  </a>
+                </div>
               </div>
               <hr className="divisor-section"></hr>
             </div>

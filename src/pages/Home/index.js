@@ -17,7 +17,7 @@ function Home() {
       const call = await api.post("call", {
         patient_id: null,
       });
-      history.push(`/chat/${call.data.id}`);
+      history.push(`/chat-anonimo/${call.data.id}`);
     } catch (error) {
       toast.error("Erro ao iniciar atendimento");
     }
