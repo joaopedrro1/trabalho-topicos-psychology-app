@@ -25,11 +25,10 @@ function Paciente() {
 
   const { signOut } = useAuth();
   const [dados, setDados] = useState();
+  const [calls, setCalls] = useState();
   const [status, setStatus] = useState(true);
 
   const { patient } = useAuth();
-
-  console.log(patient);
 
   function handleSingOut() {
     signOut();
@@ -91,6 +90,33 @@ function Paciente() {
     loadDados();
   }, [status]);
 
+  useEffect(() => {
+    async function loadCalls() {
+      const response = await api.get("patient/calls");
+
+      const data = response.data.map((call) => ({
+        ...call,
+        cal_start: new Intl.DateTimeFormat("pt-br").format(
+          new Date(call.cal_start)
+        ),
+        cal_end: call.cal_end ? `${new Intl.DateTimeFormat("pt-br").format(
+          new Date(call.cal_end)
+        )}` : null,
+        cal_hour_start: `${new Date(call.cal_start).getHours()}:${new Date(
+          call.cal_start
+        ).getMinutes()}`,
+        cal_hour_end: call.cal_end ? `${new Date(call.cal_end).getHours()}:${new Date(
+          call.cal_end
+        ).getMinutes()}` : null,
+      }));
+      setCalls(data);
+    }
+
+    loadCalls();
+  }, []);
+
+  console.log(calls && calls);
+
   return (
     <div className="painel-paciente">
       <div className="top-bar">
@@ -121,41 +147,40 @@ function Paciente() {
           Quero conversar
         </button>
 
-        <h4 style={{ display: "none" }}>HISTÓRICO</h4>
-        <div
-          style={{ display: "none" }}
-          className="history-content history-1 container align-center"
-        >
-          <div className="clock-icon">
-            <img className="clock" src={Clock} alt="" />
-          </div>
-          <div className="last-chat">
-            <span className="last-chat-text chat-line-1">
-              Conversa iniciada
-            </span>
-            <span className="last-chat-text chat-line-2">
-              as 14h terminada as 14h30
-            </span>
-          </div>
-        </div>
-        <hr style={{ display: "none" }} className="divisor-section"></hr>
-        <div
-          style={{ display: "none" }}
-          className="history-content history-2 container align-center"
-        >
-          <div className="clock-icon">
-            <img className="clock" src={Clock} alt="" />
-          </div>
-          <div className="last-chat">
-            <span className="last-chat-text chat-line-1">
-              Conversa iniciada
-            </span>
-            <span className="last-chat-text chat-line-2">
-              as 14h terminada as 14h30
-            </span>
-          </div>
-        </div>
-        <hr className="divisor-section"></hr>
+        <h4>HISTÓRICO</h4>
+        {calls &&
+          calls.map((call) => (
+            <div key={call.id}>
+              <hr className="divisor-section"></hr>
+              <div className="history-content history-2 container align-center">
+                <div className="clock-icon">
+                  <img className="clock" src={Clock} alt="" />
+                </div>
+                <div className="last-chat">
+                  <span className="last-chat-text chat-line-1">
+                    Conversa iniciada
+                  </span>
+                  <span className="last-chat-text chat-line-2">
+                    Dia {call.cal_start} às {call.cal_hour_start}
+                  </span>
+                </div>
+
+                {call.cal_end ? (
+                  <div className="last-chat">
+                    <span className="last-chat-text chat-line-1">
+                      Conversa finalizada
+                    </span>
+                    <span className="last-chat-text chat-line-2">
+                      Dia {call.cal_end} às {call.cal_hour_end}
+                    </span>
+                  </div>
+                ) : (
+                  ""
+                )}
+              </div>
+              <hr className="divisor-section"></hr>
+            </div>
+          ))}
       </div>
       <div className="edit-info">
         <div className="container">

@@ -9,7 +9,6 @@ import { Form, Input } from "@rocketseat/unform";
 import * as Yup from "yup";
 import api from "../../services/api";
 import { toast } from "react-toastify";
-import { useHistory } from "react-router-dom";
 
 const schema = Yup.object().shape({
   psy_name: Yup.string().required("O Nome é obrigatório!"),
@@ -26,12 +25,12 @@ const schema = Yup.object().shape({
 function Psicologo() {
   const { signOut } = useAuth();
   const [dados, setDados] = useState();
+  const [calls, setCalls] = useState();
   const [status, setStatus] = useState(false);
   const [availabilities, setAvailabilities] = useState([
     { week_day: 0, from: "", to: "" },
   ]);
   const [myAvailabilities, setMyAvailabilities] = useState();
-  const history = useHistory();
 
   function handleSingOut() {
     signOut();
@@ -168,6 +167,35 @@ function Psicologo() {
     loadAvailabilities();
   }, [status]);
 
+  useEffect(() => {
+    async function loadCalls() {
+      const response = await api.get("psychologist/calls");
+
+      const data = response.data.map((call) => ({
+        ...call,
+        cal_start: new Intl.DateTimeFormat("pt-br").format(
+          new Date(call.cal_start)
+        ),
+        cal_end: call.cal_end
+          ? `${new Intl.DateTimeFormat("pt-br").format(new Date(call.cal_end))}`
+          : null,
+        cal_hour_start: `${new Date(call.cal_start).getHours()}:${new Date(
+          call.cal_start
+        ).getMinutes()}`,
+        cal_hour_end: call.cal_end
+          ? `${new Date(call.cal_end).getHours()}:${new Date(
+              call.cal_end
+            ).getMinutes()}`
+          : null,
+      }));
+      setCalls(data);
+    }
+
+    loadCalls();
+  }, []);
+
+  console.log(calls && calls);
+
   return (
     <div className="painel-psicologo">
       <div className="top-bar">
@@ -193,36 +221,48 @@ function Psicologo() {
           </div>
         </div>
       </div>
-      <div style={{ display: "none" }} className="history container">
+      <div className="history container">
         <h4>HISTÓRICO</h4>
-        <div className="history-content history-1 container align-center">
-          <div className="clock-icon">
-            <img className="clock" src={Clock} alt="" />
-          </div>
-          <div className="last-chat">
-            <span className="last-chat-text chat-line-1">
-              Conversa iniciada
-            </span>
-            <span className="last-chat-text chat-line-2">
-              as 14h terminada as 14h30
-            </span>
-          </div>
-        </div>
-        <hr className="divisor-section"></hr>
-        <div className="history-content history-2 container align-center">
-          <div className="clock-icon">
-            <img className="clock" src={Clock} alt="" />
-          </div>
-          <div className="last-chat">
-            <span className="last-chat-text chat-line-1">
-              Conversa iniciada
-            </span>
-            <span className="last-chat-text chat-line-2">
-              as 14h terminada as 14h30
-            </span>
-          </div>
-        </div>
-        <hr className="divisor-section"></hr>
+
+        {calls &&
+          calls.map((call) => (
+            <div key={call.id}>
+              <hr className="divisor-section"></hr>
+              <div className="history-content history-2 container align-center">
+                <div className="clock-icon">
+                  <img className="clock" src={Clock} alt="" />
+                </div>
+                <div className="last-chat">
+                  <span className="last-chat-text chat-line-1">
+                    Conversa iniciada
+                  </span>
+                  <span className="last-chat-text chat-line-2">
+                    Dia {call.cal_start} às {call.cal_hour_start}
+                  </span>
+                </div>
+
+                {call.cal_end ? (
+                  <div className="last-chat">
+                    <span className="last-chat-text chat-line-1">
+                      Conversa finalizada
+                    </span>
+                    <span className="last-chat-text chat-line-2">
+                      Dia {call.cal_end} às {call.cal_hour_end}
+                    </span>
+
+                    <span className="last-chat-text chat-line-2">
+                      Nota: {call.cal_note}
+                    </span>
+                  </div>
+                ) : (
+                  <span className="last-chat-text chat-line-1">
+                    Conversa não finalizada
+                  </span>
+                )}
+              </div>
+              <hr className="divisor-section"></hr>
+            </div>
+          ))}
       </div>
       <div className="edit-info">
         <div className="container">
