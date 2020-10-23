@@ -5,7 +5,7 @@ import Enviar from "../../images/enviar.svg";
 import api from "../../services/api";
 
 function Chat(props) {
-  const [texto, setTexto] = useState();
+  const [text, setText] = useState();
   const [conversa, setConversa] = useState([]);
   const [socket, setSocket] = useState(io("http://localhost:3333"));
   const [call, setCall] = useState({});
@@ -84,19 +84,20 @@ function Chat(props) {
             );
           })}
         </div>
-        <div className={isOpen ? "chat-writer " : "none"} ref={chatWriterRef}>
+        <form className={isOpen ? "chat-writer " : "none"} ref={chatWriterRef}>
           <input
             type="text"
-            value={texto}
+            value={text}
             onChange={(e) => {
-              setTexto(e.target.value);
+              setText(e.target.value);
             }}
           ></input>
 
           <button
             className="btn-send"
-            onClick={() => {
-              var text = texto;
+            type="submit"
+            onClick={(e) => {
+              e.preventDefault();
               if (text != "" && text != null) {
                 setConversa((prevConversa) => [
                   ...prevConversa,
@@ -108,12 +109,13 @@ function Chat(props) {
                   room: props.computedMatch.params.sala,
                   isUser: true,
                 });
+                setText("");
               }
             }}
           >
             <img src={Enviar} style={{ fill: "white", width: "30px" }} />
           </button>
-        </div>
+        </form>
       </div>
     </div>
   );

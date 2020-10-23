@@ -65,6 +65,7 @@ function ChatPsicologo(props) {
 
   async function close(id) {
     setIsOpen(false);
+    setCall({ ...call, cal_note: observation });
 
     await api.post(`http://localhost:3333/Call/${id}`, {
       cal_note: observation,
@@ -100,7 +101,9 @@ function ChatPsicologo(props) {
             <div className="btn-back-content"></div>
             <div className="psy-info-content">
               Você está falando com{" "}
-              {call.fk_patients == null ? "" : call.fk_patients.pat_name}
+              {call.fk_patients == null
+                ? "Usuário anonimo"
+                : call.fk_patients.pat_name}
               <button
                 data-toggle="modal"
                 data-target="#encerrarModal"
@@ -123,8 +126,17 @@ function ChatPsicologo(props) {
               </div>
             );
           })}
+          {call.cal_note != null ? (
+            <div key={`note`} className="linha">
+              <div className={"ballon isUserBallon"}>
+                Nota do psicologo: <p>{call.cal_note}</p>
+              </div>
+            </div>
+          ) : (
+            ""
+          )}
         </div>
-        <div className={isOpen ? "chat-writer " : "none"} ref={chatWriterRef}>
+        <form className={isOpen ? "chat-writer " : "none"} ref={chatWriterRef}>
           <input
             type="text"
             value={text}
@@ -134,7 +146,9 @@ function ChatPsicologo(props) {
           ></input>
           <button
             className="btn-send"
-            onClick={() => {
+            onClick={(e) => {
+              e.preventDefault();
+
               if (text != "" && text != null) {
                 setHistory((prevHistory) => [
                   ...prevHistory,
@@ -146,12 +160,13 @@ function ChatPsicologo(props) {
                   room: id,
                   isUser: false,
                 });
+                setText("");
               }
             }}
           >
             <img src={Enviar} style={{ fill: "white", width: "30px" }} />
           </button>
-        </div>
+        </form>
       </div>
 
       <div
@@ -178,11 +193,11 @@ function ChatPsicologo(props) {
             </div>
             <div className="modal-body">
               <div className="form-group">
+                Deixe uma observação sobre esse atendimento:
                 <textarea
                   onChange={(e) => {
                     setObservation(e.target.value);
                   }}
-                  style={{ display: "none" }}
                   value={observation}
                   className="form-control col-12"
                 ></textarea>
@@ -202,7 +217,7 @@ function ChatPsicologo(props) {
                 onClick={() => close(id)}
                 data-dismiss="modal"
               >
-                fechar
+                Sim
               </button>
             </div>
           </div>
