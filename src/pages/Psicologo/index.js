@@ -9,6 +9,7 @@ import { Form, Input } from "@rocketseat/unform";
 import * as Yup from "yup";
 import api from "../../services/api";
 import { toast } from "react-toastify";
+import { isAfter } from 'date-fns';
 
 const schema = Yup.object().shape({
   psy_name: Yup.string().required("O Nome é obrigatório!"),
@@ -26,6 +27,7 @@ function Psicologo() {
   const { signOut } = useAuth();
   const [dados, setDados] = useState();
   const [calls, setCalls] = useState();
+  const [reloadCalls, setReloadCalls] = useState(false);
   const [status, setStatus] = useState(false);
   const [availabilities, setAvailabilities] = useState([
     { week_day: 0, from: "", to: "" },
@@ -173,28 +175,30 @@ function Psicologo() {
 
       const data = response.data.map((call) => ({
         ...call,
+        cal_start_t: call.cal_start,
         cal_start: new Intl.DateTimeFormat("pt-br").format(
           new Date(call.cal_start)
         ),
         cal_end: call.cal_end
           ? `${new Intl.DateTimeFormat("pt-br").format(new Date(call.cal_end))}`
           : null,
-        cal_hour_start: `${new Date(call.cal_start).getHours()}:${new Date(
+        cal_hour_start: `${new Date(call.cal_start).getHours()}:${String( new Date(
           call.cal_start
-        ).getMinutes()}`,
+        ).getMinutes()).padStart(2, "0")}`,
         cal_hour_end: call.cal_end
-          ? `${new Date(call.cal_end).getHours()}:${new Date(
+          ? `${new Date(call.cal_end).getHours()}:${String(new Date(
               call.cal_end
-            ).getMinutes()}`
+            ).getMinutes()).padStart(2, "0")}`
           : null,
       }));
+      console.log(data);
       setCalls(data);
     }
 
     loadCalls();
-  }, []);
+  }, [reloadCalls]);
 
-  console.log(calls && calls);
+  console.log(reloadCalls && reloadCalls);
 
   return (
     <div className="painel-psicologo">
@@ -222,7 +226,10 @@ function Psicologo() {
         </div>
       </div>
       <div className="history container">
+        <div>
         <h4>HISTÓRICO</h4>
+        <span className="relod" onClick={() => setReloadCalls(!reloadCalls)}>Recarregar Histórico</span>
+        </div>
 
         {calls &&
           calls.map((call) => (
@@ -234,7 +241,9 @@ function Psicologo() {
                 </div>
                 <div className="last-chat">
                   <span className="last-chat-text chat-line-1">
-                    Conversa iniciada
+                  {isAfter(new Date(call.cal_start_t), new Date())
+                      ? "Conversa Agendada"
+                      : "Conversa Iniciada"}
                   </span>
                   <span className="last-chat-text chat-line-2">
                     Dia {call.cal_start} às {call.cal_hour_start}
@@ -256,16 +265,23 @@ function Psicologo() {
                   </div>
                 ) : (
                   <span className="last-chat-text chat-line-1">
-                    Conversa não finalizada
+                    {!isAfter(new Date(call.cal_start_t), new Date())
+                        ? 'Conversa não finalizada'
+                        : ''
+                      }
+
                   </span>
                 )}
 
                 <div className="last-chat">
-                  <a href={"/chat/" + call.id + "/psicologo"}>
-                    <button type="submit" className="btn-login btn-primary">
-                      Ver
-                    </button>
-                  </a>
+
+                {!isAfter(new Date(call.cal_start_t), new Date()) ? (
+                    <a href={"/chat/" + call.id + "/psicologo"}>
+                      <button className="btn-login btn-primary">Ver</button>
+                    </a>
+                  ) : (
+                    ""
+                  )}
                 </div>
               </div>
               <hr className="divisor-section"></hr>
