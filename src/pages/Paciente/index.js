@@ -14,7 +14,7 @@ import { useHistory } from "react-router-dom";
 import getDay from "date-fns/getDay";
 import parseISO from "date-fns/parseISO";
 
-import { getHours, getMinutes } from "date-fns";
+import { getHours, getMinutes, isAfter } from "date-fns";
 import formatDay from "../../utils/FormatDay";
 import WeekInMinutes from "../../utils/WeekInMinutes";
 import { addMinutes } from "date-fns/esm";
@@ -150,6 +150,7 @@ function Paciente() {
 
       const data = response.data.map((call) => ({
         ...call,
+        cal_start_t: call.cal_start,
         cal_start: new Intl.DateTimeFormat("pt-br").format(
           new Date(call.cal_start)
         ),
@@ -224,7 +225,9 @@ function Paciente() {
                 </div>
                 <div className="last-chat">
                   <span className="last-chat-text chat-line-1">
-                    Conversa iniciada
+                    {isAfter(new Date(call.cal_start_t), new Date())
+                      ? "Conversa Agendada"
+                      : "Conversa Iniciada"}
                   </span>
                   <span className="last-chat-text chat-line-2">
                     Dia {call.cal_start} às {call.cal_hour_start}
@@ -244,9 +247,13 @@ function Paciente() {
                   ""
                 )}
                 <div className="last-chat">
-                  <a href={"/chat/" + call.id + "/"}>
-                    <button className="btn-login btn-primary">Ver</button>
-                  </a>
+                  {!isAfter(new Date(call.cal_start_t), new Date()) ? (
+                    <a href={"/chat/" + call.id + "/"}>
+                      <button className="btn-login btn-primary">Ver</button>
+                    </a>
+                  ) : (
+                    ""
+                  )}
                 </div>
               </div>
               <hr className="divisor-section"></hr>
@@ -331,10 +338,19 @@ function Paciente() {
                                   value.from / 60 / 60
                                 );
 
-                                const horarioAgendamento = addMinutes(
-                                  Date.now(),
-                                  10080 - minutosAtual + minutosAgendado
-                                );
+                                let horarioAgendamento = 0;
+
+                                if (minutosAtual > minutosAgendado) {
+                                  horarioAgendamento = addMinutes(
+                                    Date.now(),
+                                    10080 - minutosAtual + minutosAgendado
+                                  );
+                                } else {
+                                  horarioAgendamento = addMinutes(
+                                    Date.now(),
+                                    minutosAgendado - minutosAtual
+                                  );
+                                }
 
                                 handleSchedulerCall(
                                   psychologists[psySelected].id,
