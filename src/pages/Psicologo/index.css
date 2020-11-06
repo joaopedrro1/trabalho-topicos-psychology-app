@@ -157,6 +157,16 @@ h1{
   cursor: pointer;
 }
 
+.relod {
+  cursor: pointer;
+  color: #26235A;
+}
+
+.relod:hover {
+  color: #dc2b6c;
+  transition: ease 0.2s;
+}
+
 .buttons-form {
   display: flex;
   justify-content: space-between;

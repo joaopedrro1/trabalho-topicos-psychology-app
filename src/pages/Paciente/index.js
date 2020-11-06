@@ -300,7 +300,7 @@ function Paciente() {
                     psychologists[psySelected].fk_calls.map(
                       (valueCalls, index) => {
                         if (
-                          getDay(parseISO(valueCalls.cal_start)) ==
+                          getDay(parseISO(valueCalls.cal_start)) ===
                           horario.week_day
                         ) {
                           const minutesStart =
@@ -359,7 +359,7 @@ function Paciente() {
 
                                 const newAvailabilitys = availabilitys.filter(
                                   (value, indexFilter) => {
-                                    return index != indexFilter;
+                                    return index !== indexFilter;
                                   }
                                 );
                                 setAvailabilitys(newAvailabilitys);
