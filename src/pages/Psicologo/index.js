@@ -27,6 +27,7 @@ function Psicologo() {
   const { signOut } = useAuth();
   const [dados, setDados] = useState();
   const [calls, setCalls] = useState();
+  const [anonimos, setAnonimos] = useState();
   const [reloadCalls, setReloadCalls] = useState(false);
   const [status, setStatus] = useState(false);
   const [availabilities, setAvailabilities] = useState([
@@ -198,7 +199,16 @@ function Psicologo() {
     loadCalls();
   }, [reloadCalls]);
 
-  console.log(reloadCalls && reloadCalls);
+  useEffect(() => {
+    async function anonimosLoad() {
+      const response = await api.get("/calls-anonima");
+      setAnonimos(response.data);
+      console.log(response.data);
+    }
+
+    anonimosLoad();
+  }, [reloadCalls]);
+
 
   return (
     <div className="painel-psicologo">
@@ -224,6 +234,19 @@ function Psicologo() {
             </div>
           </div>
         </div>
+      </div>
+      <div className="container">
+        <h4>Chamadas Anônimas</h4>
+        <span className="relod" onClick={() => setReloadCalls(!reloadCalls)}>Recarregar Chamadas Anônimas</span>
+        {anonimos && anonimos.map(anonimo => (
+          <div key={anonimo.id}>
+            <span>Chamada anônima {anonimo.id}</span><br/>
+            <a href={"/chat/" + anonimo.id + "/psicologo"}>
+              <button className="btn-login btn-primary">Atender</button>
+            </a>
+          </div>
+        ))}
+
       </div>
       <div className="history container">
         <div>
