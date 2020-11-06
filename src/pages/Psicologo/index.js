@@ -334,7 +334,7 @@ function Psicologo() {
 
       <div className="edit-availability">
         <div className="small-container">
-          <h4 className="edit-info-title">Diponibilidade de horário</h4>
+          <h4 className="edit-info-title">Disponibilidade de horário</h4>
 
           <div>
             <h5>Meus horários</h5>
