@@ -37,6 +37,7 @@ function Paciente() {
   const [psySelected, setPsySelected] = useState();
   const [availabilitys, setAvailabilitys] = useState([]);
   const [status, setStatus] = useState(true);
+  const [reloadCalls, setReloadCalls] = useState(false);
 
   const { patient } = useAuth();
 
@@ -129,6 +130,39 @@ function Paciente() {
     };
   }
 
+  async function loadPsychologists() {
+    const response = await api.get("psychologist/list");
+
+    const data = response.data.map((psy) => ({
+      ...psy,
+    }));
+    setPsychologists(data);
+  }
+
+  async function loadCalls() {
+    const response = await api.get("patient/calls");
+
+    const data = response.data.map((call) => ({
+      ...call,
+      cal_start_t: call.cal_start,
+      cal_start: new Intl.DateTimeFormat("pt-br").format(
+        new Date(call.cal_start)
+      ),
+      cal_end: call.cal_end
+        ? `${new Intl.DateTimeFormat("pt-br").format(new Date(call.cal_end))}`
+        : null,
+      cal_hour_start: `${new Date(call.cal_start).getHours()}:${String(
+        new Date(call.cal_start).getMinutes()
+      ).padStart(2, "0")}`,
+      cal_hour_end: call.cal_end
+        ? `${new Date(call.cal_end).getHours()}:${String(
+            new Date(call.cal_end).getMinutes()
+          ).padStart(2, "0")}`
+        : null,
+    }));
+    setCalls(data);
+  }
+
   useEffect(() => {
     async function loadDados() {
       try {
@@ -145,43 +179,13 @@ function Paciente() {
   }, [status]);
 
   useEffect(() => {
-    async function loadCalls() {
-      const response = await api.get("patient/calls");
-
-      const data = response.data.map((call) => ({
-        ...call,
-        cal_start_t: call.cal_start,
-        cal_start: new Intl.DateTimeFormat("pt-br").format(
-          new Date(call.cal_start)
-        ),
-        cal_end: call.cal_end
-          ? `${new Intl.DateTimeFormat("pt-br").format(new Date(call.cal_end))}`
-          : null,
-        cal_hour_start: `${new Date(call.cal_start).getHours()}:${new Date(
-          call.cal_start
-        ).getMinutes()}`,
-        cal_hour_end: call.cal_end
-          ? `${new Date(call.cal_end).getHours()}:${new Date(
-              call.cal_end
-            ).getMinutes()}`
-          : null,
-      }));
-      setCalls(data);
-    }
-
     loadCalls();
     loadPsychologists();
   }, []);
 
-  async function loadPsychologists() {
-    const response = await api.get("psychologist/list");
-
-    const data = response.data.map((psy) => ({
-      ...psy,
-    }));
-    setPsychologists(data);
-  }
-
+  useEffect(() => {
+    loadCalls();
+  }, [reloadCalls]);
   //  console.log(calls && calls);
 
   return (
@@ -213,6 +217,10 @@ function Paciente() {
         <button onClick={handleStartChat} className="btn-primary">
           Quero conversar
         </button>
+        <br></br>
+        <span className="relod" onClick={() => setReloadCalls(!reloadCalls)}>
+          Recarregar Chamadas Anônimas
+        </span>
 
         <h4>HISTÓRICO</h4>
         {calls &&
