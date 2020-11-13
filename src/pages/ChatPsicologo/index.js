@@ -5,6 +5,8 @@ import Enviar from "../../images/enviar.svg";
 import api from "../../services/api";
 import { useAuth } from "../../hooks/AuthContext";
 import { useHistory } from "react-router-dom";
+import Back from "../../images/back.svg";
+import { Link } from "react-router-dom";
 
 function ChatPsicologo(props) {
   const [text, setText] = useState("");
@@ -98,18 +100,24 @@ function ChatPsicologo(props) {
       <div className="top-bar">
         <div className="container">
           <div className="top-bar-content">
-            <div className="btn-back-content"></div>
             <div className="psy-info-content">
+              <img
+                className="btn-back back"
+                src={Back}
+                alt=""
+              />
               Você está falando com{" "}
               {call.fk_patients == null
                 ? "Usuário anonimo"
                 : call.fk_patients.pat_name}
-              <button
+            </div>
+            <div className="btn-holder">
+            <button
                 data-toggle="modal"
                 data-target="#encerrarModal"
                 className={isOpen ? "btn-close " : "none"}
               >
-                Encerrar atendimento
+                Encerrar
               </button>
             </div>
           </div>
@@ -164,7 +172,7 @@ function ChatPsicologo(props) {
               }
             }}
           >
-            <img src={Enviar} style={{ fill: "white", width: "30px" }} />
+            <img src={Enviar} />
           </button>
         </form>
       </div>

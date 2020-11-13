@@ -20,17 +20,28 @@ h5 {
   color: #fff;
 }
 
+.psy-info-content {
+  width: 90%;
+}
+
+.btn-close{
+  margin-left: 5px !important;
+  padding: 7px 24px;
+}
+
 .top-bar-content {
   display: flex;
   align-items: center;
 }
 
 .btn-back-content {
-  width: 15%;
+  width: 5%;
 }
 
-.psy-info-content {
-  width: 70%;
+.back{
+  width: 35px;
+  height: 35px;
+  padding-right: 10px;
 }
 
 .btn-icons-content {
@@ -171,6 +182,11 @@ h5 {
   margin-left: 5px;
 }
 
+.btn-send img{
+  fill: "white";
+  width: 30px;
+}
+
 .none {
   display: none;
 }
@@ -202,5 +218,29 @@ h5 {
   .btn-logout {
     width: 25px;
     height: 25px;
+  }
+  
+  .btn-close{
+    font-size: 12px;
+    padding: 7px 10px;
+  }
+
+  .psy-info-content{
+    font-size: 14px;
+  }
+
+  .btn-send{
+    width: 45px;
+    height: 45px;
+  }
+
+  .btn-send img{
+    width: 20px;
+    height: 20px;
+  }
+
+  .back{
+    width: 30px;
+    height: 30px;
   }
 }

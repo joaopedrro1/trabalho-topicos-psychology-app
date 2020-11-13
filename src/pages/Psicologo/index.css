@@ -24,7 +24,7 @@ h1{
 }
 
 .psy-info-content{
-    width: 80%;
+    width: 90%;
     display: flex;
     align-items: center;
 }
@@ -94,6 +94,10 @@ h1{
   background: #324773;
 }
 
+.chamadas{
+    padding-top: 30px;
+}
+
 .hours {
   padding-left: 15px;
 }
@@ -157,6 +161,16 @@ h1{
   cursor: pointer;
 }
 
+.relod {
+  cursor: pointer;
+  color: #26235A;
+}
+
+.relod:hover {
+  color: #dc2b6c;
+  transition: ease 0.2s;
+}
+
 .buttons-form {
   display: flex;
   justify-content: space-between;
@@ -197,5 +211,9 @@ h1{
     .btn-logout{
         width: 25px;
         height: 25px;
+    }
+    
+    .button-availab{
+        font-size: 15px;
     }
 }

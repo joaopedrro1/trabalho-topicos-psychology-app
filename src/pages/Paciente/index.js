@@ -11,6 +11,13 @@ import * as Yup from "yup";
 import api from "../../services/api";
 import { toast } from "react-toastify";
 import { useHistory } from "react-router-dom";
+import getDay from "date-fns/getDay";
+import parseISO from "date-fns/parseISO";
+
+import { getHours, getMinutes, isAfter } from "date-fns";
+import formatDay from "../../utils/FormatDay";
+import WeekInMinutes from "../../utils/WeekInMinutes";
+import { addMinutes } from "date-fns/esm";
 
 const schema = Yup.object().shape({
   pat_name: Yup.string().required("O Nome é obrigatório!"),
@@ -26,6 +33,9 @@ function Paciente() {
   const { signOut } = useAuth();
   const [dados, setDados] = useState();
   const [calls, setCalls] = useState();
+  const [psychologists, setPsychologists] = useState([]);
+  const [psySelected, setPsySelected] = useState();
+  const [availabilitys, setAvailabilitys] = useState([]);
   const [status, setStatus] = useState(true);
 
   const { patient } = useAuth();
@@ -59,6 +69,21 @@ function Paciente() {
     }
   }
 
+  async function handleSchedulerCall(psychologist_id, cal_start) {
+    try {
+      toast.success("Agendamento realizado");
+      const patient_id = JSON.parse(localStorage.getItem("@Patient:patient"))
+        .id;
+      const call = await api.post("call", {
+        patient_id: patient_id,
+        psychologist_id: psychologist_id,
+        cal_start: cal_start,
+      });
+    } catch (error) {
+      toast.error("Erro ao iniciar atendimento");
+    }
+  }
+
   async function handleEdit(data) {
     try {
       await api.put("patient", {
@@ -73,6 +98,35 @@ function Paciente() {
     } catch (error) {
       toast.error("Erro ao editar, verifique seus dados!");
     }
+  }
+
+  function toHours(availability) {
+    const fromMinutes = availability.from % 60;
+    const toMinutes = availability.to % 60;
+
+    if (fromMinutes > 0 || toMinutes > 0) {
+      const fromHours = Math.floor(availability.from / 60);
+      const toHours = Math.floor(availability.to / 60);
+
+      return {
+        ...availability,
+        from: `${fromHours < 10 ? "0" + fromHours : fromHours}:${
+          fromMinutes < 10 ? "0" + fromMinutes : fromMinutes
+        }`,
+        to: `${toHours < 10 ? "0" + toHours : toHours}:${
+          toMinutes < 10 ? "0" + toMinutes : toMinutes
+        }`,
+      };
+    }
+
+    const fromHours = availability.from / 60;
+    const toHours = availability.to / 60;
+
+    return {
+      ...availability,
+      from: `${fromHours < 10 ? "0" + fromHours + ":00" : fromHours + ":00"}`,
+      to: `${toHours < 10 ? "0" + toHours + ":00" : toHours + ":00"}`,
+    };
   }
 
   useEffect(() => {
@@ -96,6 +150,7 @@ function Paciente() {
 
       const data = response.data.map((call) => ({
         ...call,
+        cal_start_t: call.cal_start,
         cal_start: new Intl.DateTimeFormat("pt-br").format(
           new Date(call.cal_start)
         ),
@@ -115,9 +170,19 @@ function Paciente() {
     }
 
     loadCalls();
+    loadPsychologists();
   }, []);
 
-  console.log(calls && calls);
+  async function loadPsychologists() {
+    const response = await api.get("psychologist/list");
+
+    const data = response.data.map((psy) => ({
+      ...psy,
+    }));
+    setPsychologists(data);
+  }
+
+  //  console.log(calls && calls);
 
   return (
     <div className="painel-paciente">
@@ -160,7 +225,9 @@ function Paciente() {
                 </div>
                 <div className="last-chat">
                   <span className="last-chat-text chat-line-1">
-                    Conversa iniciada
+                    {isAfter(new Date(call.cal_start_t), new Date())
+                      ? "Conversa Agendada"
+                      : "Conversa Iniciada"}
                   </span>
                   <span className="last-chat-text chat-line-2">
                     Dia {call.cal_start} às {call.cal_hour_start}
@@ -180,15 +247,141 @@ function Paciente() {
                   ""
                 )}
                 <div className="last-chat">
-                  <a href={"/chat/" + call.id + "/"}>
-                    <button className="btn-login btn-primary">Ver</button>
-                  </a>
+                  {!isAfter(new Date(call.cal_start_t), new Date()) ? (
+                    <a href={"/chat/" + call.id + "/"}>
+                      <button className="btn-view btn-primary">Ver</button>
+                    </a>
+                  ) : (
+                    ""
+                  )}
                 </div>
               </div>
               <hr className="divisor-section"></hr>
             </div>
           ))}
       </div>
+      <div className="call-scheduler">
+        <div className="container">
+          <h4 className="call-scheduler -title">AGENDAR ATENDIMENTO</h4>
+        </div>
+        <div className="small-container">
+          <select
+            value={psySelected || ""}
+            onChange={(v) => {
+              setPsySelected(v.target.value);
+
+              setAvailabilitys(
+                psychologists[v.target.value].fk_psy_availability
+              );
+            }}
+          >
+            <option value="" disabled hidden>
+              Selecione
+            </option>
+
+            {psychologists.map((value, index) => {
+              return (
+                <option key={index} value={index}>
+                  {value.psy_name}
+                </option>
+              );
+            })}
+          </select>
+
+          {availabilitys.length > 0 ? (
+            <>
+              Horarios disponiveis:
+              <table style={{ width: "100%" }}>
+                <tbody>
+                  {availabilitys.map((value, index) => {
+                    const horario = toHours(value);
+                    let horarioLivre = true;
+
+                    psychologists[psySelected].fk_calls.map(
+                      (valueCalls, index) => {
+                        if (
+                          getDay(parseISO(valueCalls.cal_start)) ===
+                          horario.week_day
+                        ) {
+                          const minutesStart =
+                            getHours(parseISO(valueCalls.cal_start)) * 60 +
+                            getMinutes(parseISO(valueCalls.cal_start));
+
+                          if (
+                            minutesStart >= value.from &&
+                            minutesStart <= value.to
+                          ) {
+                            //    console.log("Horario indisponivel");
+                            horarioLivre = false;
+                          }
+                        }
+                      }
+                    );
+                    if (horarioLivre) {
+                      return (
+                        <tr key={index}>
+                          <td>{formatDay(horario.week_day)}</td>
+                          <td>{horario.from}</td>
+                          <td>{horario.to}</td>
+                          <td>
+                            <button
+                              onClick={(e) => {
+                                const minutosAtual = WeekInMinutes(
+                                  getDay(Date.now()),
+                                  getHours(Date.now()),
+                                  getMinutes(Date.now())
+                                );
+
+                                const minutosAgendado = WeekInMinutes(
+                                  horario.week_day,
+                                  value.from / 60,
+                                  value.from / 60 / 60
+                                );
+
+                                let horarioAgendamento = 0;
+
+                                if (minutosAtual > minutosAgendado) {
+                                  horarioAgendamento = addMinutes(
+                                    Date.now(),
+                                    10080 - minutosAtual + minutosAgendado
+                                  );
+                                } else {
+                                  horarioAgendamento = addMinutes(
+                                    Date.now(),
+                                    minutosAgendado - minutosAtual
+                                  );
+                                }
+
+                                handleSchedulerCall(
+                                  psychologists[psySelected].id,
+                                  horarioAgendamento
+                                );
+
+                                const newAvailabilitys = availabilitys.filter(
+                                  (value, indexFilter) => {
+                                    return index !== indexFilter;
+                                  }
+                                );
+                                setAvailabilitys(newAvailabilitys);
+                              }}
+                              className="btn-agendar btn-primary"
+                            >
+                              Agendar
+                            </button>
+                          </td>
+                        </tr>
+                      );
+                    }
+                  })}
+                </tbody>
+              </table>
+            </>
+          ) : (
+            ""
+          )}
+        </div>
+      </div>
+
       <div className="edit-info">
         <div className="container">
           <h4 className="edit-info-title">Editar informações</h4>
@@ -212,14 +405,14 @@ function Paciente() {
             </div>
 
             <div className="buttons-form">
-              <button type="submit" className="btn-login btn-primary">
+              <button type="submit" className="btn-primary btn-editar">
                 Editar
               </button>
 
               <button
                 onClick={handleDelete}
                 type="button"
-                className="btn-secondary btn-decline"
+                className="btn-delete btn-secondary"
               >
                 Excluir conta
               </button>
