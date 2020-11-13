@@ -43,7 +43,8 @@ function SignUpPsy() {
   }
 
   return (
-    <div className="login">
+  <div className="signup-psy">
+    <div className="login cadastro-psy">
       <div className="form-login">
         <img className="img-destaque" src={Img5} />
         <h2 className="form-title">Psicológo</h2>
@@ -93,6 +94,7 @@ function SignUpPsy() {
         </Form>
       </div>
     </div>
+  </div>
   );
 }
 
