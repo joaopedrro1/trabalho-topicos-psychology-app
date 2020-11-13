@@ -249,7 +249,7 @@ function Paciente() {
                 <div className="last-chat">
                   {!isAfter(new Date(call.cal_start_t), new Date()) ? (
                     <a href={"/chat/" + call.id + "/"}>
-                      <button className="btn-login btn-primary">Ver</button>
+                      <button className="btn-view btn-primary">Ver</button>
                     </a>
                   ) : (
                     ""
@@ -262,7 +262,7 @@ function Paciente() {
       </div>
       <div className="call-scheduler">
         <div className="container">
-          <h4 className="call-scheduler -title">Agendar atendimento</h4>
+          <h4 className="call-scheduler -title">AGENDAR ATENDIMENTO</h4>
         </div>
         <div className="small-container">
           <select
@@ -364,7 +364,7 @@ function Paciente() {
                                 );
                                 setAvailabilitys(newAvailabilitys);
                               }}
-                              className="btn-login btn-primary"
+                              className="btn-agendar btn-primary"
                             >
                               Agendar
                             </button>
@@ -405,14 +405,14 @@ function Paciente() {
             </div>
 
             <div className="buttons-form">
-              <button type="submit" className="btn-login btn-primary">
+              <button type="submit" className="btn-primary btn-editar">
                 Editar
               </button>
 
               <button
                 onClick={handleDelete}
                 type="button"
-                className="btn-secondary btn-decline"
+                className="btn-delete btn-secondary"
               >
                 Excluir conta
               </button>

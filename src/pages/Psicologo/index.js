@@ -9,7 +9,7 @@ import { Form, Input } from "@rocketseat/unform";
 import * as Yup from "yup";
 import api from "../../services/api";
 import { toast } from "react-toastify";
-import { isAfter } from 'date-fns';
+import { isAfter } from "date-fns";
 
 const schema = Yup.object().shape({
   psy_name: Yup.string().required("O Nome é obrigatório!"),
@@ -183,13 +183,13 @@ function Psicologo() {
         cal_end: call.cal_end
           ? `${new Intl.DateTimeFormat("pt-br").format(new Date(call.cal_end))}`
           : null,
-        cal_hour_start: `${new Date(call.cal_start).getHours()}:${String( new Date(
-          call.cal_start
-        ).getMinutes()).padStart(2, "0")}`,
+        cal_hour_start: `${new Date(call.cal_start).getHours()}:${String(
+          new Date(call.cal_start).getMinutes()
+        ).padStart(2, "0")}`,
         cal_hour_end: call.cal_end
-          ? `${new Date(call.cal_end).getHours()}:${String(new Date(
-              call.cal_end
-            ).getMinutes()).padStart(2, "0")}`
+          ? `${new Date(call.cal_end).getHours()}:${String(
+              new Date(call.cal_end).getMinutes()
+            ).padStart(2, "0")}`
           : null,
       }));
       console.log(data);
@@ -208,7 +208,6 @@ function Psicologo() {
 
     anonimosLoad();
   }, [reloadCalls]);
-
 
   return (
     <div className="painel-psicologo">
@@ -235,23 +234,28 @@ function Psicologo() {
           </div>
         </div>
       </div>
-      <div className="container">
+      <div className="container chamadas">
         <h4>Chamadas Anônimas</h4>
-        <span className="relod" onClick={() => setReloadCalls(!reloadCalls)}>Recarregar Chamadas Anônimas</span>
-        {anonimos && anonimos.map(anonimo => (
-          <div key={anonimo.id}>
-            <span>Chamada anônima {anonimo.id}</span><br/>
-            <a href={"/chat/" + anonimo.id + "/psicologo"}>
-              <button className="btn-login btn-primary">Atender</button>
-            </a>
-          </div>
-        ))}
-
+        <span className="relod" onClick={() => setReloadCalls(!reloadCalls)}>
+          Recarregar Chamadas Anônimas
+        </span>
+        {anonimos &&
+          anonimos.map((anonimo) => (
+            <div key={anonimo.id}>
+              <span>Chamada anônima {anonimo.id}</span>
+              <br />
+              <a href={"/chat/" + anonimo.id + "/psicologo"}>
+                <button className="btn-login btn-primary">Atender</button>
+              </a>
+            </div>
+          ))}
       </div>
       <div className="history container">
         <div>
-        <h4>HISTÓRICO</h4>
-        <span className="relod" onClick={() => setReloadCalls(!reloadCalls)}>Recarregar Histórico</span>
+          <h4>HISTÓRICO</h4>
+          <span className="relod" onClick={() => setReloadCalls(!reloadCalls)}>
+            Recarregar Histórico
+          </span>
         </div>
 
         {calls &&
@@ -264,7 +268,7 @@ function Psicologo() {
                 </div>
                 <div className="last-chat">
                   <span className="last-chat-text chat-line-1">
-                  {isAfter(new Date(call.cal_start_t), new Date())
+                    {isAfter(new Date(call.cal_start_t), new Date())
                       ? "Conversa Agendada"
                       : "Conversa Iniciada"}
                   </span>
@@ -289,18 +293,15 @@ function Psicologo() {
                 ) : (
                   <span className="last-chat-text chat-line-1">
                     {!isAfter(new Date(call.cal_start_t), new Date())
-                        ? 'Conversa não finalizada'
-                        : ''
-                      }
-
+                      ? "Conversa não finalizada"
+                      : ""}
                   </span>
                 )}
 
                 <div className="last-chat">
-
-                {!isAfter(new Date(call.cal_start_t), new Date()) ? (
+                  {!isAfter(new Date(call.cal_start_t), new Date()) ? (
                     <a href={"/chat/" + call.id + "/psicologo"}>
-                      <button className="btn-login btn-primary">Ver</button>
+                      <button className="btn-view btn-primary">Ver</button>
                     </a>
                   ) : (
                     ""
@@ -355,14 +356,14 @@ function Psicologo() {
               </div>
             </div>
             <div className="buttons-form">
-              <button type="submit" className="btn-login btn-primary">
+              <button type="submit" className="btn-editar btn-primary">
                 Editar
               </button>
 
               <button
                 onClick={handleDelete}
                 type="button"
-                className="btn-secondary btn-decline"
+                className="btn-secondary btn-delete"
               >
                 Excluir conta
               </button>
@@ -371,10 +372,11 @@ function Psicologo() {
         </div>
       </div>
 
-      <div className="edit-availability">
+      <div className="edit-availability container">
+        <h4 className="edit-info-title container">
+          Disponibilidade de horário
+        </h4>
         <div className="small-container">
-          <h4 className="edit-info-title">Disponibilidade de horário</h4>
-
           <div>
             <h5>Meus horários</h5>
             {myAvailabilities &&

@@ -13,7 +13,7 @@ h1{
 }
 
 .user-info-content{
-    width: 80%;
+    width: 90%;
     display: flex;
     align-items: center;
 }
@@ -140,10 +140,12 @@ h1{
 }
 
 @media (max-width: 800px){
-
+    table{
+        font-size: 13px;
+    }
     .clock{
-        width: 42px;
-        height: 42px;
+        width: 32px !important;
+        height: 32px !important;
     }
 
     .profile-pic{
@@ -174,5 +176,24 @@ h1{
     .btn-logout{
         width: 25px;
         height: 25px;
+    }
+
+    .last-chat-text{
+        font-size: 12px;
+    }
+
+    .btn-view, .btn-agendar{
+        padding: 7px 21px;
+        font-size: 12px;
+    }
+
+    .btn-editar{
+        padding: 10px 25px;
+        font-size: 12px
+    }
+
+    .btn-delete{
+        padding: 10px 25px;
+        font-size: 12px;
     }
 }
