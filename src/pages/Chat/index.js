@@ -3,6 +3,10 @@ import "./index.css";
 import io from "socket.io-client";
 import Enviar from "../../images/enviar.svg";
 import api from "../../services/api";
+import {
+  sendNotification,
+  initializeNotification,
+} from "../../utils/sendNotification";
 
 function Chat(props) {
   const [text, setText] = useState();
@@ -40,15 +44,28 @@ function Chat(props) {
   }
 
   useEffect(() => {
-    console.log(props.computedMatch.params.sala);
     socket.emit("transfer_room", props.computedMatch.params.sala);
     getHistorico(props.computedMatch.params.sala);
     getCall(props.computedMatch.params.sala);
+
+    initializeNotification();
+
     socket.on("text", function (data) {
       setConversa((prevConversa) => [
         ...prevConversa,
         { text: data.text, isUser: false },
       ]);
+
+      sendNotification(
+        "Nova mensagem do Psicologo",
+        {
+          title: "Nova mensagem do Psicologo",
+          body: data.text,
+        },
+        () => {
+          window.focus();
+        }
+      );
     });
   }, []);
 

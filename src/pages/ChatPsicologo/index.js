@@ -5,6 +5,10 @@ import Enviar from "../../images/enviar.svg";
 import api from "../../services/api";
 import { useAuth } from "../../hooks/AuthContext";
 import { useHistory } from "react-router-dom";
+import {
+  initializeNotification,
+  sendNotification,
+} from "../../utils/sendNotification";
 
 function ChatPsicologo(props) {
   const [text, setText] = useState("");
@@ -70,6 +74,7 @@ function ChatPsicologo(props) {
     await api.post(`http://localhost:3333/Call/${id}`, {
       cal_note: observation,
     });
+
     alert("Atendimento encerrado");
     // historyRoute.goBack();
   }
@@ -81,11 +86,25 @@ function ChatPsicologo(props) {
     await getHistory(id);
     await setPsy();
 
+    initializeNotification();
+
     socket.on("text", function (data) {
       setHistory((prevHistory) => [
         ...prevHistory,
         { text: data.text, isUser: false },
       ]);
+
+      sendNotification(
+        "Nova mensagem do Paciente",
+        {
+          title: "Nova mensagem do Paciente",
+
+          body: data.text,
+        },
+        () => {
+          window.focus();
+        }
+      );
     });
   }, []);
 
