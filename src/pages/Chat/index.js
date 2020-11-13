@@ -3,6 +3,8 @@ import "./index.css";
 import io from "socket.io-client";
 import Enviar from "../../images/enviar.svg";
 import api from "../../services/api";
+import Back from "../../images/back.svg";
+import { Link } from "react-router-dom";
 
 function Chat(props) {
   const [text, setText] = useState();
@@ -62,8 +64,14 @@ function Chat(props) {
       <div className="top-bar">
         <div className="container">
           <div className="top-bar-content">
-            <div className="btn-back-content"></div>
             <div className="psy-info-content">
+              <Link to="/cadastro">
+              <img
+                className="btn-back back"
+                src={Back}
+                alt=""
+              />
+              </Link>
               Você está conversando com{" "}
               {call.fk_psychologists == undefined
                 ? "..."
@@ -113,7 +121,7 @@ function Chat(props) {
               }
             }}
           >
-            <img src={Enviar} style={{ fill: "white", width: "30px" }} />
+            <img src={Enviar} />
           </button>
         </form>
       </div>
