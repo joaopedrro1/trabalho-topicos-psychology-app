@@ -219,7 +219,7 @@ function Paciente() {
         </button>
         <br></br>
         <span className="relod" onClick={() => setReloadCalls(!reloadCalls)}>
-          Recarregar Chamadas Anônimas
+          Recarregar Chamadas
         </span>
 
         <h4>HISTÓRICO</h4>
