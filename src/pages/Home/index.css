@@ -123,6 +123,7 @@
     padding: 10px;
     border-radius: 19px;
     transition: background 0.2s;
+    display: inline-block;
   }
 
   .links:hover {
